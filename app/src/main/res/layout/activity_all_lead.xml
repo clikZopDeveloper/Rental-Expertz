@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!--    <data>
+            <variable
+                name="loginViewModel"
+                type="com.example.salesapp.viewmodelactivity.LoginViewModel" />
+        </data>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        tools:context=".Activity.LoginActivity">
+
+        <include
+            android:id="@+id/igToolbar"
+            layout="@layout/toolbar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10dp"
+            android:layout_marginHorizontal="@dimen/_5dip"
+            android:weightSum="2">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:drawableTint="@color/black"
+                android:layout_weight="1"
+                android:background="@drawable/btn_border_shape"
+                android:hint="Select Status"
+                app:boxStrokeWidth="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/selectStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+               android:layout_marginStart="@dimen/_5dip"
+                android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:drawableTint="@color/black"
+                android:layout_weight="1"
+                android:background="@drawable/btn_border_shape"
+                android:hint="Select Number"
+                app:boxStrokeWidth="0dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/selectNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_4dip"
+            android:paddingVertical="14dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_border_shape"
+            android:hint="Search here..."
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:layout_marginStart="@dimen/_5dip"
+            android:textSize="16sp"
+            android:layout_marginEnd="@dimen/_5dip"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcAllLead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_allleaddata" />
+
+    </LinearLayout>
+
+</layout>

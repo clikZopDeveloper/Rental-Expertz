@@ -1,0 +1,356 @@
+package com.example.rentalexpertz.Activity
+
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Intent
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.view.WindowManager
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.rentalexpertz.Adapter.*
+import com.example.rentalexpertz.ApiHelper.ApiController
+import com.example.rentalexpertz.ApiHelper.ApiResponseListner
+import com.example.rentalexpertz.Model.*
+import com.example.rentalexpertz.R
+import com.example.rentalexpertz.Utills.*
+import com.example.rentalexpertz.databinding.ActivityAllLeadBinding
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+import com.stpl.antimatter.Utils.ApiContants
+import java.util.ArrayList
+
+class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
+    GoogleApiClient.OnConnectionFailedListener,
+    ConnectivityListener.ConnectivityReceiverListener {
+    private lateinit var binding: ActivityAllLeadBinding
+    private lateinit var apiClient: ApiController
+    var myReceiver: ConnectivityListener? = null
+    private lateinit var mAllAdapter: AllLeadAdapter
+    var activity: Activity = this
+    var leadID = 0
+    var conversion = " "
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_all_lead)
+
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        );
+
+        myReceiver = ConnectivityListener()
+
+        binding.igToolbar.ivMenu.setImageDrawable(resources.getDrawable(R.drawable.ic_back_black))
+        binding.igToolbar.ivMenu.setOnClickListener { finish() }
+        binding.igToolbar.ivLogout.visibility = View.GONE
+        binding.igToolbar.ivMenu.visibility = View.VISIBLE
+        binding.igToolbar.switchDayStart.visibility = View.GONE
+
+
+        if (intent.getStringExtra("leadStatus").equals("")){
+            binding.igToolbar.tvTitle.text = "All Lead"
+        }else{
+            binding.igToolbar.tvTitle.text = intent.getStringExtra("leadStatus")
+        }
+
+        if (intent.hasExtra("conversion")) {
+            conversion = intent.getStringExtra("conversion")!!
+            if (conversion.equals("Partial")) {//Partial Converted
+                binding.igToolbar.tvTitle.text = "Partial Converted"
+            } else if (conversion.equals("Completed")) {//Complete Lead
+                binding.igToolbar.tvTitle.text = "Complete Lead"
+            } else {
+            }
+        }
+
+        intent.getStringExtra("leadStatus")?.let { apiAllLead(it) }
+        binding.selectStatus.setOnClickListener {
+            setStatusData()
+        }
+    }
+
+    fun apiAllLead(status: String) {
+        SalesApp.isAddAccessToken = true
+        apiClient = ApiController(this, this)
+        val params = Utility.getParmMap()
+        params["status"] = status
+        params["conversion"] = conversion
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.AllLeadData, params)
+    }
+
+    fun handleAllLead(data: List<AllLeadDataBean.Data>) {
+        binding.rcAllLead.layoutManager = LinearLayoutManager(this)
+        mAllAdapter = AllLeadAdapter(this, data, intent.getStringExtra("leadStatus"), object :
+            RvStatusClickListner {
+            override fun clickPos(status: String, pos: Int) {
+                leadID = pos
+                apiLeadDetail(pos)
+            }
+        })
+        binding.rcAllLead.adapter = mAllAdapter
+        // rvMyAcFiled.isNestedScrollingEnabled = false
+        binding.rcAllLead.isNestedScrollingEnabled = false
+        mAllAdapter.notifyDataSetChanged()
+
+        binding.edSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+                if (data != null) {
+                    mAllAdapter.filter.filter(s)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
+                mAllAdapter.filter.filter(s)
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                mAllAdapter.filter.filter(s)
+                /* if (s.toString().trim { it <= ' ' }.length < 1) {
+                     ivClear.visibility = View.GONE
+                 } else {
+                     ivClear.visibility = View.GONE
+                 }*/
+            }
+        })
+
+    }
+
+    @SuppressLint("SuspiciousIndentation")
+    override fun success(tag: String?, jsonElement: JsonElement?) {
+        try {
+            apiClient.progressView.hideLoader()
+
+            if (tag == ApiContants.AllLeadData) {
+                val allLeadDataBean = apiClient.getConvertIntoModel<AllLeadDataBean>(
+                    jsonElement.toString(),
+                    AllLeadDataBean::class.java
+                )
+                //   Toast.makeText(this, allStatusBean.msg, Toast.LENGTH_SHORT).show()
+                if (allLeadDataBean.error == false) {
+                    handleAllLead(allLeadDataBean.data)
+                }
+            }
+
+            if (tag == ApiContants.LeadDetail) {
+                val leadDeatilBean = apiClient.getConvertIntoModel<LeadDetailBean>(
+                    jsonElement.toString(),
+                    LeadDetailBean::class.java
+                )
+                //   Toast.makeText(this, allStatusBean.msg, Toast.LENGTH_SHORT).show()
+                if (leadDeatilBean.error == false) {
+                    setLeadDetailDialog(leadDeatilBean.data)
+                }
+            }
+
+        } catch (e: Exception) {
+            Log.d("error>>", e.localizedMessage)
+        }
+    }
+
+    override fun failure(tag: String?, errorMessage: String) {
+        apiClient.progressView.hideLoader()
+        Utility.showSnackBar(this, errorMessage)
+    }
+
+    fun apiLeadDetail(leadID: Int) {
+        SalesApp.isAddAccessToken = true
+        apiClient = ApiController(this, this)
+        val params = Utility.getParmMap()
+        params["lead_id"] = leadID.toString()
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.LeadDetail, params)
+    }
+
+    fun setLeadDetailDialog(data: List<LeadDetailBean.Data>) {
+        val builder = AlertDialog.Builder(this, 0).create()
+        val dialog = layoutInflater.inflate(R.layout.dailog_leaddetail, null)
+        val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
+        val tvStatus = dialog.findViewById<TextView>(R.id.tvStatus)
+        val tvType = dialog.findViewById<TextView>(R.id.tvType)
+        val tvCategory = dialog.findViewById<TextView>(R.id.tvCategory)
+        val tvSubCategory = dialog.findViewById<TextView>(R.id.tvSubCategory)
+        val tvSource = dialog.findViewById<TextView>(R.id.tvSource)
+        val tvState = dialog.findViewById<TextView>(R.id.tvState)
+        val tvCity = dialog.findViewById<TextView>(R.id.tvCity)
+        val tvAddress = dialog.findViewById<TextView>(R.id.tvAddress)
+        val tvEmail = dialog.findViewById<TextView>(R.id.tvEmail)
+        val tvName = dialog.findViewById<TextView>(R.id.tvName)
+        val tvClientNumber = dialog.findViewById<TextView>(R.id.tvMobNumber)
+        val tvClassification = dialog.findViewById<TextView>(R.id.tvClassification)
+        val tvProject = dialog.findViewById<TextView>(R.id.tvProject)
+        val tvCampaign = dialog.findViewById<TextView>(R.id.tvCampaign)
+        builder.setCanceledOnTouchOutside(false)
+        builder.setView(dialog)
+        builder.show()
+        ivClose.setOnClickListener {
+            builder.dismiss()
+        }
+
+        if (!data.get(0).name.toString().isNullOrEmpty()) tvName.setText(data.get(0).name.toString())
+        if (!data.get(0).email.toString().isNullOrEmpty()) tvEmail.setText(data.get(0).email.toString())
+        if (!data.get(0).mobile.toString().isNullOrEmpty()) tvClientNumber.setText(data.get(0).mobile.toString())
+        if (!data.get(0).address.toString().isNullOrEmpty()) tvAddress.setText(data.get(0).address.toString())
+        if (!data.get(0).status.toString().isNullOrEmpty()) tvStatus.setText(data.get(0).status.toString())
+        if (!data.get(0).city.toString().isNullOrEmpty()) tvCity.setText(data.get(0).city.toString())
+        if (!data.get(0).campaign.toString().isNullOrEmpty()) tvCampaign.setText(data.get(0).campaign.toString())
+
+
+        if (!data.get(0).state.toString().isNullOrEmpty()) tvState.setText(data.get(0).state.toString())
+        if (!data.get(0).classification.toString().isNullOrEmpty()) tvClassification.setText(data.get(0).classification.toString())
+        if (!data.get(0).project.toString().isNullOrEmpty()) tvProject.setText(data.get(0).project.toString())
+        if (!data.get(0).categoryId.toString().isNullOrEmpty()) tvCategory.setText(data.get(0).categoryId.toString())
+        if (!data.get(0).subCategoryId.toString().isNullOrEmpty()) tvSubCategory.setText(data.get(0).subCategoryId.toString())
+        if (!data.get(0).source.toString().isNullOrEmpty()) tvSource.setText(data.get(0).source.toString())
+        if (!data.get(0).type.toString().isNullOrEmpty()) tvType.setText(data.get(0).type.toString())
+
+
+    }
+
+    private fun openFullScreenDialog(imgUrl: String) {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.fullscreen_dailog)
+        dialog.window!!.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.MATCH_PARENT
+        )
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window!!.setGravity(Gravity.CENTER)
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(false)
+        dialog.show()
+
+        val ivFullImage = dialog.findViewById<ImageView>(R.id.ivFullImage)
+        val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
+        val ivDownload = dialog.findViewById<ImageView>(R.id.ivDownload)
+        //     ivClose.background = RoundView(Color.BLACK, RoundView.getRadius(100f))
+        ivClose.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivDownload.setOnClickListener {
+            GeneralUtilities.downloadUrl(activity, ApiContants.downloadUrl + imgUrl)
+        }
+
+        Glide.with(this)
+            .load(ApiContants.BaseUrl + imgUrl)
+            .into(ivFullImage)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == 101) {
+            val leadStatus: String = data?.getStringExtra("leadStatus")!!
+            Log.d("zxczc", leadStatus)
+            apiAllLead(leadStatus)
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        GeneralUtilities.unregisterBroadCastReceiver(this, myReceiver)
+    }
+
+    override fun onResume() {
+        GeneralUtilities.registerBroadCastReceiver(this, myReceiver)
+        SalesApp.setConnectivityListener(this)
+        super.onResume()
+    }
+
+    override fun onNetworkConnectionChange(isconnected: Boolean) {
+        ApiContants.isconnectedtonetwork = isconnected
+        GeneralUtilities.internetConnectivityAction(this, isconnected)
+    }
+
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {}
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // Start the LocationService when the app is closed
+        //  startService(Intent(this, LocationService::class.java))
+    }
+
+    fun setStatusData() {
+        val state = arrayOfNulls<String>(getMenus().size)
+        for (i in getMenus().indices) {
+            //Storing names to string array
+            state[i] = getMenus().get(i).title
+        }
+        val adapte1: ArrayAdapter<String?>
+        adapte1 = ArrayAdapter(
+            this@AllLeadActivity,
+            android.R.layout.simple_list_item_1,
+            state
+        )
+        binding.selectStatus.setAdapter(adapte1)
+        binding.selectStatus.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
+            binding.selectStatus.setText(parent.getItemAtPosition(position).toString())
+
+            Log.d("StateID", "" + parent.getItemAtPosition(position).toString())
+           /* for (catData in getMenus()) {
+                if (catData.name.equals(
+                        parent.getItemAtPosition(position).toString()
+                    )
+                ) {
+                    binding.selectStatus.setText(parent.getItemAtPosition(position).toString())
+              //      SubCatID = catData.id
+                    Log.d("StateID", "" + catData.id)
+                }
+           }*/
+            apiAllLead(binding.selectStatus.getText().toString())
+            Toast.makeText(
+                applicationContext,
+                binding.selectStatus.getText().toString(),
+                Toast.LENGTH_SHORT
+            ).show()
+            setStatusData()
+
+        })
+    }
+
+    private fun getMenus(): ArrayList<MenuModelBean> {
+        var menuList = ArrayList<MenuModelBean>()
+        menuList.add(MenuModelBean(0, "new lead", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(1, "pending", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(2, "processed", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(3, "converted", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(4, "scheduled", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(5, "visit scheduled", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(6, "visit done", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(7, "booked", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(8, "completed", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(9, "cancelled", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(10, "not interested", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(11, "not picked", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(12, "wrong number", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(13, "not reachable", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(14, "channel partner", "", R.drawable.ic_dashbord))
+
+        return menuList
+    }
+
+}

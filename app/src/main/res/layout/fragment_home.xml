@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="@dimen/_5dip"
+                    tools:context=".Fragment.HomeFragment">
+
+                    <EditText
+                        android:id="@+id/edSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_20dip"
+                        android:layout_marginBottom="@dimen/_5dip"
+                        android:background="@drawable/btn_border_shape"
+                        android:drawableStart="@drawable/ic_search_black_24dp"
+                        android:hint="Search here..."
+                        android:paddingHorizontal="@dimen/_4dip"
+                        android:paddingVertical="14dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/gray"
+                        android:textSize="16sp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_5dip"
+                        android:layout_marginTop="@dimen/_5dip"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:id="@+id/tvAllLeads"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_6dp"
+                            android:paddingVertical="@dimen/_10dp"
+                            android:text="All Lead"
+                            android:textColor="@color/text_color"
+                            android:textSize="@dimen/_14sp" />
+
+                        <TextView
+                            android:id="@+id/tvAllTask"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_6dp"
+                            android:paddingVertical="@dimen/_10dp"
+                            android:text="All Task"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <View
+                            android:id="@+id/viewAllLLead"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_3dip"
+                            android:layout_marginEnd="@dimen/_5dip"
+                            android:layout_weight="1"
+                            android:visibility="visible"
+                            android:background="@color/colorPrimary" />
+
+                        <View
+                            android:id="@+id/viewAllLTask"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_3dip"
+                            android:layout_marginStart="@dimen/_5dip"
+                            android:layout_weight="1"
+android:visibility="invisible"
+                            android:background="@color/white" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcDashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_home_allleads" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5dip"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_border_shape"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_4dip">
+
+                            <TextView
+                                android:id="@+id/tvTodayLeads"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5dip"
+                                android:fontFamily="@font/roboto_bold"
+                                android:paddingVertical="@dimen/_6dp"
+                                android:text="fetching..."
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/_14sp" />
+
+                            <View
+                                android:id="@+id/viewTodayLead"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_2dip"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginEnd="@dimen/_5dip"
+                                android:layout_below="@+id/tvTodayLeads"
+                                android:layout_toLeftOf="@+id/ivMImage"
+                                android:background="@color/colorPrimary" />
+                            <ImageView
+                                android:id="@+id/ivMImage"
+                                android:layout_width="@dimen/_30dip"
+                                android:layout_height="@dimen/_30dip"
+                                android:layout_below="@+id/tvTodayLeads"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_5dip"
+                                android:src="@drawable/ic_dashbord" />
+
+                            <TextView
+                                android:id="@+id/tvtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5dip"
+                                android:fontFamily="@font/roboto_bold"
+                                android:layout_below="@+id/ivMImage"
+                                android:layout_marginBottom="@dimen/_5dip"
+                                android:paddingVertical="@dimen/_4dip"
+                                android:text="Today Lead"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/_16sp" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5dip"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_border_shape"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_4dip">
+
+                            <TextView
+                                android:id="@+id/tvTotalLeads"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5dip"
+                                android:fontFamily="@font/roboto_bold"
+                                android:paddingVertical="@dimen/_6dp"
+                                android:text="fetching..."
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/_14sp" />
+
+                            <View
+                                android:id="@+id/viewTodayLeadData"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_2dip"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginEnd="@dimen/_5dip"
+                                android:layout_below="@+id/tvTotalLeads"
+                                android:layout_toLeftOf="@+id/ivLImage"
+                                android:background="@color/colorPrimary" />
+                            <ImageView
+                                android:id="@+id/ivLImage"
+                                android:layout_width="@dimen/_30dip"
+                                android:layout_height="@dimen/_30dip"
+                                android:layout_below="@+id/tvTotalLeads"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_5dip"
+                                android:src="@drawable/ic_dashbord" />
+
+                            <TextView
+                                android:id="@+id/tvtitle2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_5dip"
+                                android:fontFamily="@font/roboto_bold"
+                                android:layout_below="@+id/ivLImage"
+                                android:layout_marginBottom="@dimen/_5dip"
+                                android:paddingVertical="@dimen/_4dip"
+                                android:text="TotalLeads"
+                                android:textColor="@color/text_color"
+                                android:textSize="@dimen/_16sp" />
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.core.widget.NestedScrollView>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fb_AddArchitect"
+                style="@style/style_FB_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_10dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:src="@drawable/ic_baseline_add_24"
+                app:tint="@android:color/white" />
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</layout>
