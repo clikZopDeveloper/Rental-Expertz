@@ -120,27 +120,93 @@
                         android:textColor="@color/black"
                         android:textColorHint="@color/colorPrimary"
                         android:textSize="16sp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_4dip"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_4dip"
+                        android:weightSum="2">
+                        <EditText
+                            android:id="@+id/editDateDOB"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_border_shape"
+                            android:hint="Select DOB"
+                            android:layout_weight="1"
+                            android:paddingHorizontal="@dimen/_4dip"
+                            android:paddingVertical="14dp"
+                            android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+                            android:drawablePadding="10dp"
+                            android:focusable="false"
+                            android:drawableTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="16sp" />
+                        <EditText
+                            android:id="@+id/editDateDOA"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_border_shape"
+                            android:hint="Select DOA"
+                            android:layout_weight="1"
+                            android:layout_marginStart="5dp"
+                            android:paddingHorizontal="@dimen/_4dip"
+                            android:paddingVertical="14dp"
+                            android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+                            android:drawablePadding="10dp"
+                            android:focusable="false"
+                            android:drawableTint="@color/colorPrimary"
+                            android:focusableInTouchMode="false"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/colorPrimary"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvSource"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginHorizontal="@dimen/_5dip"
+                        android:layout_marginTop="@dimen/_5dip"
+                        android:layout_marginBottom="@dimen/_5dip"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_border_shape"
+                        android:hint="Select Source"
+                        android:paddingHorizontal="@dimen/_4dip"
+                        app:boxStrokeWidth="0dp">
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/stateSource"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
+
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_5dip"
                     android:layout_marginTop="@dimen/_5dip"
-                    android:layout_marginBottom="@dimen/_10dp"
                     android:background="@drawable/btn_round_shape_white"
                     android:elevation="@dimen/_6dp"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_4dip"
-                    android:weightSum="2">
-
+                    android:orientation="vertical"
+                    android:padding="@dimen/_4dip">
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvType"
-                        android:layout_weight="1"
+                        android:layout_marginTop="@dimen/_5dip"
                         android:background="@drawable/btn_border_shape"
                         android:hint="Select Type"
                         android:paddingHorizontal="@dimen/_4dip"
@@ -162,41 +228,6 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvSource"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginBottom="@dimen/_10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btn_border_shape"
-                        android:hint="Select Source"
-                        android:paddingHorizontal="@dimen/_4dip"
-                        app:boxStrokeWidth="0dp">
-
-
-                        <AutoCompleteTextView
-                            android:id="@+id/stateSource"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_5dip"
-                    android:layout_marginTop="@dimen/_5dip"
-                    android:layout_marginBottom="@dimen/_10dp"
-                    android:background="@drawable/btn_round_shape_white"
-                    android:elevation="@dimen/_6dp"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_4dip">
 
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -241,80 +272,41 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_5dip"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginBottom="@dimen/_10dp"
+                android:background="@drawable/btn_round_shape_white"
+                android:elevation="@dimen/_6dp"
+                android:orientation="vertical"
+                android:padding="@dimen/_4dip">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_5dip"
-                    android:layout_marginTop="@dimen/_5dip"
-                    android:layout_marginBottom="@dimen/_10dp"
-                    android:background="@drawable/btn_round_shape_white"
-                    android:elevation="@dimen/_6dp"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_4dip">
+                    android:layout_below="@+id/tvType"
+                    android:background="@drawable/btn_border_shape"
+                    android:hint="Select Classification"
+                    android:paddingHorizontal="@dimen/_4dip"
+                    app:boxCornerRadiusBottomEnd="@dimen/_10dp"
+                    app:boxCornerRadiusBottomStart="@dimen/_10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="@dimen/_10dp"
+                    app:boxStrokeWidth="0dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <!--  app:boxCornerRadiusBottomEnd="@dimen/_10dp"
+                      app:boxCornerRadiusBottomStart="@dimen/_10dp"
+                      app:boxCornerRadiusTopEnd="10dp"
+                      app:boxCornerRadiusTopStart="@dimen/_10dp"-->
+                    <AutoCompleteTextView
+                        android:id="@+id/stateClassification"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/btn_border_shape"
-                        android:hint="Select State"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidth="0dp"
-                        app:cursorColor="@color/blue">
+                        android:inputType="none" />
 
-
-                        <AutoCompleteTextView
-                            android:id="@+id/stateselector"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/btn_border_shape"
-                        android:hint="Select City"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidth="0dp"
-                        app:cursorColor="@color/blue">
-
-
-                        <AutoCompleteTextView
-                            android:id="@+id/cityselector"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="@dimen/_10dp"
-                        android:background="@drawable/btn_border_shape"
-                        android:hint="Enter Address"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidth="0dp"
-                        app:cursorColor="@color/blue">
-
-                        <!--this is the actual edit text which takes the input-->
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editAddress"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -322,7 +314,6 @@
                     android:layout_marginHorizontal="@dimen/_5dip"
                     android:layout_marginTop="@dimen/_10dp"
                     android:layout_marginBottom="@dimen/_10dp"
-                    android:background="@drawable/btn_round_shape_white"
                     android:elevation="@dimen/_6dp"
                     android:orientation="horizontal"
                     android:padding="@dimen/_4dip"
@@ -332,26 +323,20 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvType"
-                        android:layout_weight="1"
                         android:background="@drawable/btn_border_shape"
-                        android:hint="Select Classification"
-                        android:paddingHorizontal="@dimen/_4dip"
-                        app:boxCornerRadiusBottomEnd="@dimen/_10dp"
-                        app:boxCornerRadiusBottomStart="@dimen/_10dp"
-                        app:boxCornerRadiusTopEnd="10dp"
-                        app:boxCornerRadiusTopStart="@dimen/_10dp"
-                        app:boxStrokeWidth="0dp">
+                        android:hint="Select Campigns"
+                        android:layout_weight="1"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeWidth="0dp"
+                        app:cursorColor="@color/blue">
 
-                        <!--  app:boxCornerRadiusBottomEnd="@dimen/_10dp"
-                          app:boxCornerRadiusBottomStart="@dimen/_10dp"
-                          app:boxCornerRadiusTopEnd="10dp"
-                          app:boxCornerRadiusTopStart="@dimen/_10dp"-->
+
                         <AutoCompleteTextView
-                            android:id="@+id/stateClassification"
+                            android:id="@+id/cityCampigns"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="none" />
+                            android:inputType="none"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -362,7 +347,6 @@
                         android:layout_below="@+id/tvSource"
                         android:layout_alignParentEnd="true"
                         android:layout_marginStart="5dp"
-                        android:layout_marginBottom="@dimen/_10dp"
                         android:layout_weight="1"
                         android:background="@drawable/btn_border_shape"
                         android:hint="Select Project"
@@ -379,63 +363,121 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
+            </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_5dip"
-                    android:layout_marginTop="@dimen/_5dip"
-                    android:layout_marginBottom="@dimen/_10dp"
-                    android:background="@drawable/btn_round_shape_white"
-                    android:elevation="@dimen/_6dp"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_4dip">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
+
+
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/btn_border_shape"
-                        android:hint="Select Campigns"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidth="0dp"
-                        app:cursorColor="@color/blue">
-
-
-                        <AutoCompleteTextView
-                            android:id="@+id/cityCampigns"
+                        android:layout_marginHorizontal="@dimen/_5dip"
+                        android:layout_marginTop="@dimen/_5dip"
+                        android:layout_marginBottom="@dimen/_10dp"
+                        android:background="@drawable/btn_round_shape_white"
+                        android:elevation="@dimen/_6dp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_4dip">
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="none"/>
+                            android:layout_marginHorizontal="@dimen/_5dip"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/btn_round_shape_white"
+                            android:elevation="@dimen/_6dp"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/_4dip">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/btn_border_shape"
+                                android:hint="Select State"
+                                android:layout_weight="1"
+                                app:boxBackgroundColor="@color/white"
+                                app:boxStrokeColor="@color/white"
+                                app:boxStrokeWidth="0dp"
+                                app:cursorColor="@color/blue">
 
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="@dimen/_10dp"
-                        android:background="@drawable/btn_border_shape"
-                        android:hint="Enter Comments"
-                        app:boxBackgroundColor="@color/white"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidth="0dp"
-                        app:cursorColor="@color/blue">
+                                <AutoCompleteTextView
+                                    android:id="@+id/stateselector"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
 
-                        <!--this is the actual edit text which takes the input-->
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editComments"
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/btn_border_shape"
+                                android:hint="Select City"
+                                android:layout_weight="1"
+                                android:layout_marginStart="5dp"
+                                app:boxBackgroundColor="@color/white"
+                                app:boxStrokeColor="@color/white"
+                                app:boxStrokeWidth="0dp"
+                                app:cursorColor="@color/blue">
+
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/cityselector"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/btn_border_shape"
+                            android:hint="Enter Address"
+                            app:boxBackgroundColor="@color/white"
+                            app:boxStrokeColor="@color/white"
+                            app:boxStrokeWidth="0dp"
+                            app:cursorColor="@color/blue">
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                            <!--this is the actual edit text which takes the input-->
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
 
-                </LinearLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="@dimen/_10dp"
+                            android:background="@drawable/btn_border_shape"
+                            android:hint="Enter Comments"
+                            app:boxBackgroundColor="@color/white"
+                            app:boxStrokeColor="@color/white"
+                            app:boxStrokeWidth="0dp"
+                            app:cursorColor="@color/blue">
+
+                            <!--this is the actual edit text which takes the input-->
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/editComments"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/btnSubmit"
@@ -447,7 +489,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/btn_round_shape"
-                    android:backgroundTint="@color/e_blue_color"
+                    android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:padding="15dp"

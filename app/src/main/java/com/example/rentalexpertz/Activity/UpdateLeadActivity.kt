@@ -99,7 +99,7 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
             }
 
             ivView.setOnClickListener {  }
-            editTime.visibility=View.GONE
+
 
             editTime.setOnClickListener {
                 val timePickerDialog = TimePickerDialog(
@@ -170,9 +170,7 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
         params["id"] = leadID
         params["status"] = leadStatus
         params["remarks"] = binding.editRemark.text.toString()
-        params["remind"] = binding.editDate.text.toString()
-      //  params["call_time"] = binding.editTime.text.toString()
-
+        params["remind"] = binding.editDate.text.toString()+" "+binding.editTime.text.toString()
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.UpdateLead, params)
 
@@ -248,7 +246,7 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
         menuList.add(MenuModelBean(1, "pending", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(2, "processed", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(3, "converted", "", R.drawable.ic_dashbord))
-        menuList.add(MenuModelBean(4, "scheduled", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(4, "call scheduled", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(5, "visit scheduled", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(6, "visit done", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(7, "booked", "", R.drawable.ic_dashbord))
@@ -259,6 +257,7 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
         menuList.add(MenuModelBean(12, "wrong number", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(13, "not reachable", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(14, "channel partner", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(15, "future lead", "", R.drawable.ic_dashbord))
 
         return menuList
     }

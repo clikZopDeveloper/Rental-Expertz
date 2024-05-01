@@ -13,15 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rentalexpertz.Activity.AddLeadActivity
 import com.example.rentalexpertz.Activity.UpdateLeadActivity
 import com.example.rentalexpertz.Model.AllLeadDataBean
+import com.example.rentalexpertz.Model.SearchBean
 import com.example.rentalexpertz.R
 import com.example.rentalexpertz.Utills.GeneralUtilities
 import com.example.rentalexpertz.Utills.RvStatusClickListner
 import com.stpl.antimatter.Utils.ApiContants
 
 
-class AllLeadAdapter(var context: Activity, var list: List<AllLeadDataBean.Data>,var leadStatus:String?, var rvClickListner: RvStatusClickListner) : RecyclerView.Adapter<AllLeadAdapter.MyViewHolder>(),
-    Filterable {
-    var mFilteredList: MutableList<AllLeadDataBean.Data> = list as MutableList<AllLeadDataBean.Data>
+class SearchDataAdapter(var context: Activity, var mFilteredList: List<SearchBean.Data>, var leadStatus:String?, var rvClickListner: RvStatusClickListner) : RecyclerView.Adapter<SearchDataAdapter.MyViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder { // infalte the item Layout
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_allleaddata, parent, false)
@@ -87,31 +86,5 @@ class AllLeadAdapter(var context: Activity, var list: List<AllLeadDataBean.Data>
        val ivCall: ImageView = itemview.findViewById(R.id.ivCall)
     }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): FilterResults {
-                val charString = charSequence.toString()
-                if (charString.isEmpty()) {
-                    mFilteredList = list as MutableList<AllLeadDataBean.Data>
-                } else {
-                    val filteredList = ArrayList<AllLeadDataBean.Data>()
-                    for (serviceBean in list) {
-                        if (serviceBean.name.toString().toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(serviceBean)
-                        }
-                    }
-                    mFilteredList = filteredList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = mFilteredList
-                return filterResults
-            }
-
-            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                mFilteredList = filterResults.values as ArrayList<AllLeadDataBean.Data>
-                android.os.Handler().postDelayed(Runnable { notifyDataSetChanged() }, 200)
-            }
-        }
-    }
 
 }

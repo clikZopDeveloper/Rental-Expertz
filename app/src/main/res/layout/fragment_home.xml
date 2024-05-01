@@ -24,26 +24,56 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_5dip"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:layout_marginHorizontal="@dimen/_5dip"
                     tools:context=".Fragment.HomeFragment">
 
-                    <EditText
-                        android:id="@+id/edSearch"
+                    <ImageView
+                        android:layout_width="@dimen/_170dp"
+                        android:layout_height="@dimen/_100dip"
+                        android:layout_gravity="center"
+                        android:src="@drawable/app_logo" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_5dip"
                         android:layout_marginTop="@dimen/_20dip"
-                        android:layout_marginBottom="@dimen/_5dip"
-                        android:background="@drawable/btn_border_shape"
-                        android:drawableStart="@drawable/ic_search_black_24dp"
-                        android:hint="Search here..."
-                        android:paddingHorizontal="@dimen/_4dip"
-                        android:paddingVertical="14dp"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/gray"
-                        android:textSize="16sp" />
+                        android:orientation="horizontal">
 
+                        <EditText
+                            android:id="@+id/edSearch"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_5dip"
+                            android:layout_marginBottom="@dimen/_5dip"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_border_shape"
+                            android:drawableStart="@drawable/ic_search_black_24dp"
+                            android:hint="Search here..."
+                            android:paddingHorizontal="@dimen/_4dip"
+                            android:paddingVertical="14dp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray"
+                            android:textSize="16sp" />
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/fb_Search"
+                            style="@style/style_FB_submit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:fabSize="mini"
+                            android:layout_marginTop="@dimen/_5dip"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_10dp"
+                            android:layout_marginEnd="@dimen/_10dp"
+                            android:layout_marginBottom="@dimen/_10dp"
+                            android:src="@drawable/ic_search_black_24dp"
+                            app:tint="@android:color/white" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -94,8 +124,8 @@
                             android:layout_height="@dimen/_3dip"
                             android:layout_marginEnd="@dimen/_5dip"
                             android:layout_weight="1"
-                            android:visibility="visible"
-                            android:background="@color/colorPrimary" />
+                            android:background="@color/colorPrimary"
+                            android:visibility="visible" />
 
                         <View
                             android:id="@+id/viewAllLTask"
@@ -103,8 +133,8 @@
                             android:layout_height="@dimen/_3dip"
                             android:layout_marginStart="@dimen/_5dip"
                             android:layout_weight="1"
-android:visibility="invisible"
-                            android:background="@color/white" />
+                            android:background="@color/white"
+                            android:visibility="invisible" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -112,8 +142,8 @@ android:visibility="invisible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="4"
                         tools:listitem="@layout/item_home_allleads" />
 
@@ -148,11 +178,12 @@ android:visibility="invisible"
                                 android:id="@+id/viewTodayLead"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/_2dip"
+                                android:layout_below="@+id/tvTodayLeads"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginEnd="@dimen/_5dip"
-                                android:layout_below="@+id/tvTodayLeads"
                                 android:layout_toLeftOf="@+id/ivMImage"
                                 android:background="@color/colorPrimary" />
+
                             <ImageView
                                 android:id="@+id/ivMImage"
                                 android:layout_width="@dimen/_30dip"
@@ -166,11 +197,11 @@ android:visibility="invisible"
                                 android:id="@+id/tvtitle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@+id/ivMImage"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_5dip"
-                                android:fontFamily="@font/roboto_bold"
-                                android:layout_below="@+id/ivMImage"
                                 android:layout_marginBottom="@dimen/_5dip"
+                                android:fontFamily="@font/roboto_bold"
                                 android:paddingVertical="@dimen/_4dip"
                                 android:text="Today Lead"
                                 android:textColor="@color/text_color"
@@ -203,11 +234,12 @@ android:visibility="invisible"
                                 android:id="@+id/viewTodayLeadData"
                                 android:layout_width="wrap_content"
                                 android:layout_height="@dimen/_2dip"
+                                android:layout_below="@+id/tvTotalLeads"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginEnd="@dimen/_5dip"
-                                android:layout_below="@+id/tvTotalLeads"
                                 android:layout_toLeftOf="@+id/ivLImage"
                                 android:background="@color/colorPrimary" />
+
                             <ImageView
                                 android:id="@+id/ivLImage"
                                 android:layout_width="@dimen/_30dip"
@@ -221,11 +253,11 @@ android:visibility="invisible"
                                 android:id="@+id/tvtitle2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@+id/ivLImage"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_5dip"
-                                android:fontFamily="@font/roboto_bold"
-                                android:layout_below="@+id/ivLImage"
                                 android:layout_marginBottom="@dimen/_5dip"
+                                android:fontFamily="@font/roboto_bold"
                                 android:paddingVertical="@dimen/_4dip"
                                 android:text="TotalLeads"
                                 android:textColor="@color/text_color"
@@ -235,6 +267,183 @@ android:visibility="invisible"
 
                     </LinearLayout>
 
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="6dp"
+                            android:layout_margin="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Call Schedule"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5dip"
+                        android:weightSum="3"
+                        android:paddingVertical="@dimen/_6dp"
+                        android:background="@color/colorPrimary"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Name "
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:textSize="@dimen/_14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile No "
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:textSize="@dimen/_14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Email ID "
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:textSize="@dimen/_14sp" />
+
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcCallSechudle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_call_sechdule" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="6dp"
+                            android:layout_margin="5dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="Visit Schedule"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5dip"
+                            android:weightSum="3"
+                            android:paddingVertical="@dimen/_6dp"
+                            android:background="@color/colorPrimary"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Name "
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:textSize="@dimen/_14sp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Mobile No "
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:textSize="@dimen/_14sp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Email ID "
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:textSize="@dimen/_14sp" />
+
+                        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcVisitSechudle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_call_sechdule" />
+
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:padding="6dp"
+                           android:layout_margin="5dp"
+                           android:textColor="@color/black"
+                           android:textSize="@dimen/_14sp"
+                           android:layout_gravity="center"
+                           android:gravity="center"
+                           android:text="Missed Follow Up"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5dip"
+                            android:weightSum="3"
+                            android:paddingVertical="@dimen/_6dp"
+                            android:background="@color/colorPrimary"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Name "
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:textSize="@dimen/_14sp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Mobile No "
+                                android:gravity="center"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:textSize="@dimen/_14sp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Email ID "
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/quicksand_bold"
+                                android:textSize="@dimen/_14sp" />
+
+                        </LinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rcFollowUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_call_sechdule" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
                 </LinearLayout>
 
 

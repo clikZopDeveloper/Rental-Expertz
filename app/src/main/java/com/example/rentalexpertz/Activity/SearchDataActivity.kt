@@ -6,8 +6,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -24,27 +22,27 @@ import com.example.rentalexpertz.ApiHelper.ApiResponseListner
 import com.example.rentalexpertz.Model.*
 import com.example.rentalexpertz.R
 import com.example.rentalexpertz.Utills.*
-import com.example.rentalexpertz.databinding.ActivityAllLeadBinding
+import com.example.rentalexpertz.databinding.ActivitySearchBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.gson.JsonElement
 import com.stpl.antimatter.Utils.ApiContants
 import java.util.ArrayList
 
-class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
+class SearchDataActivity : AppCompatActivity(), ApiResponseListner,
     GoogleApiClient.OnConnectionFailedListener,
     ConnectivityListener.ConnectivityReceiverListener {
-    private lateinit var binding: ActivityAllLeadBinding
+    private lateinit var binding: ActivitySearchBinding
     private lateinit var apiClient: ApiController
     var myReceiver: ConnectivityListener? = null
-    private lateinit var mAllAdapter: AllLeadAdapter
+
     var activity: Activity = this
     var leadID = 0
     var conversion = " "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_all_lead)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.setFlags(
@@ -59,49 +57,30 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         binding.igToolbar.ivLogout.visibility = View.GONE
         binding.igToolbar.ivMenu.visibility = View.VISIBLE
         binding.igToolbar.switchDayStart.visibility = View.GONE
+        binding.igToolbar.ivNoti.visibility = View.GONE
+        binding.igToolbar.tvTitle.text = "Search Lead"
 
-
-        if (intent.getStringExtra("leadStatus").equals("")){
-            binding.igToolbar.tvTitle.text = "All Lead"
-        }else{
-            binding.igToolbar.tvTitle.text = intent.getStringExtra("leadStatus")
-        }
-
-        if (intent.hasExtra("conversion")) {
-            conversion = intent.getStringExtra("conversion")!!
-            if (conversion.equals("Partial")) {//Partial Converted
-                binding.igToolbar.tvTitle.text = "Partial Converted"
-            } else if (conversion.equals("Completed")) {//Complete Lead
-                binding.igToolbar.tvTitle.text = "Complete Lead"
-            } else {
-            }
-        }
-
-        intent.getStringExtra("leadStatus")?.let { apiAllLead(it) }
-        binding.selectStatus.setOnClickListener {
-            setStatusData()
-        }
+        intent.getStringExtra("searchKey")?.let { apiSearchData(it) }
 
         binding.swipeReferesh.setOnRefreshListener {
-            intent.getStringExtra("leadStatus")?.let { apiAllLead(it) }
+            intent.getStringExtra("searchKey")?.let { apiSearchData(it) }
             binding.swipeReferesh.isRefreshing = false
 
         }
     }
 
-    fun apiAllLead(status: String) {
+    fun apiSearchData(status: String) {
         SalesApp.isAddAccessToken = true
         apiClient = ApiController(this, this)
         val params = Utility.getParmMap()
-        params["status"] = status
-        params["conversion"] = conversion
+        params["query"] = status
         apiClient.progressView.showLoader()
-        apiClient.getApiPostCall(ApiContants.AllLeadData, params)
+        apiClient.getApiPostCall(ApiContants.SearchLead, params)
     }
 
-    fun handleAllLead(data: List<AllLeadDataBean.Data>) {
+    fun handleSearchData(data: List<AllLeadDataBean.Data>) {
         binding.rcAllLead.layoutManager = LinearLayoutManager(this)
-        mAllAdapter = AllLeadAdapter(this, data, intent.getStringExtra("leadStatus"), object :
+        val mAllAdapter = AllLeadAdapter(this, data, "", object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
                 leadID = pos
@@ -113,26 +92,6 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         binding.rcAllLead.isNestedScrollingEnabled = false
         mAllAdapter.notifyDataSetChanged()
 
-        binding.edSearch.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {
-                if (data != null) {
-                    mAllAdapter.filter.filter(s)
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-                mAllAdapter.filter.filter(s)
-            }
-
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                mAllAdapter.filter.filter(s)
-                /* if (s.toString().trim { it <= ' ' }.length < 1) {
-                     ivClear.visibility = View.GONE
-                 } else {
-                     ivClear.visibility = View.GONE
-                 }*/
-            }
-        })
 
     }
 
@@ -141,14 +100,14 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         try {
             apiClient.progressView.hideLoader()
 
-            if (tag == ApiContants.AllLeadData) {
+            if (tag == ApiContants.SearchLead) {
                 val allLeadDataBean = apiClient.getConvertIntoModel<AllLeadDataBean>(
                     jsonElement.toString(),
                     AllLeadDataBean::class.java
                 )
                 //   Toast.makeText(this, allStatusBean.msg, Toast.LENGTH_SHORT).show()
                 if (allLeadDataBean.error == false) {
-                    handleAllLead(allLeadDataBean.data)
+                    handleSearchData(allLeadDataBean.data)
                 }
             }
 
@@ -287,7 +246,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         if (resultCode == RESULT_OK && requestCode == 101) {
             val leadStatus: String = data?.getStringExtra("leadStatus")!!
             Log.d("zxczc", leadStatus)
-            apiAllLead(leadStatus)
+            apiSearchData(leadStatus)
         }
 
     }
@@ -324,43 +283,6 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         //  startService(Intent(this, LocationService::class.java))
     }
 
-    fun setStatusData() {
-        val state = arrayOfNulls<String>(getMenus().size)
-        for (i in getMenus().indices) {
-            //Storing names to string array
-            state[i] = getMenus().get(i).title
-        }
-        val adapte1: ArrayAdapter<String?>
-        adapte1 = ArrayAdapter(
-            this@AllLeadActivity,
-            android.R.layout.simple_list_item_1,
-            state
-        )
-        binding.selectStatus.setAdapter(adapte1)
-        binding.selectStatus.setOnItemClickListener(AdapterView.OnItemClickListener { parent, view, position, id ->
-            binding.selectStatus.setText(parent.getItemAtPosition(position).toString())
-
-            Log.d("StateID", "" + parent.getItemAtPosition(position).toString())
-           /* for (catData in getMenus()) {
-                if (catData.name.equals(
-                        parent.getItemAtPosition(position).toString()
-                    )
-                ) {
-                    binding.selectStatus.setText(parent.getItemAtPosition(position).toString())
-              //      SubCatID = catData.id
-                    Log.d("StateID", "" + catData.id)
-                }
-           }*/
-            apiAllLead(binding.selectStatus.getText().toString())
-            Toast.makeText(
-                applicationContext,
-                binding.selectStatus.getText().toString(),
-                Toast.LENGTH_SHORT
-            ).show()
-            setStatusData()
-
-        })
-    }
 
     private fun getMenus(): ArrayList<MenuModelBean> {
         var menuList = ArrayList<MenuModelBean>()
@@ -368,7 +290,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         menuList.add(MenuModelBean(1, "pending", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(2, "processed", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(3, "converted", "", R.drawable.ic_dashbord))
-        menuList.add(MenuModelBean(4, "call scheduled", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(4, "scheduled", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(5, "visit scheduled", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(6, "visit done", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(7, "booked", "", R.drawable.ic_dashbord))

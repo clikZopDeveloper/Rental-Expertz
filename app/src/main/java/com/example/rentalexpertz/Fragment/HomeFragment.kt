@@ -13,8 +13,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rentalexpertz.Activity.*
+import com.example.rentalexpertz.Adapter.CallSechduleAdapter
 import com.example.rentalexpertz.Adapter.DashAllLeadAdapter
 import com.example.rentalexpertz.Adapter.DashTodayLeadAdapter
+import com.example.rentalexpertz.Adapter.MissedFollowupAdapter
+import com.example.rentalexpertz.Adapter.VisitSechduleAdapter
 import com.example.rentalexpertz.ApiHelper.ApiController
 import com.example.rentalexpertz.ApiHelper.ApiResponseListner
 import com.example.rentalexpertz.Model.*
@@ -48,6 +51,8 @@ class HomeFragment : Fragment(), ApiResponseListner {
         val titleText = (activity as DashboardActivity?)
         titleText?.setTitle("Dashboard")
 
+      ApiContants.movabalebutton(binding.fbAddArchitect,requireActivity())
+
         apiAllGet()
         apiCallDashboard()
 
@@ -56,10 +61,28 @@ class HomeFragment : Fragment(), ApiResponseListner {
                 apiCallDashboard()
                 refreshLayout.isRefreshing = false
             }
+            binding.fbSearch.setOnClickListener {
+                if (binding.edSearch.text.toString().isNullOrEmpty()){
+                    Toast.makeText(requireContext(),"Enter Search Key",Toast.LENGTH_SHORT).show()
+                }else{
+                    startActivity(
+                        Intent(context, SearchDataActivity::class.java).putExtra(
+                            "searchKey",
+                            binding.edSearch.text.toString()
+                        )
+                    )
+                }
 
-            fbAddArchitect.setOnClickListener {
-                startActivity(Intent(requireActivity(), AddLeadActivity::class.java).putExtra("way","Add Lead"))
             }
+           /* fbAddArchitect.setOnClickListener {
+                startActivity(Intent(requireActivity(), AddLeadActivity::class.java).putExtra("way","Add Lead"))
+            }*/
+            tvAllTask.setOnClickListener {
+                (context as DashboardActivity).replaceFragment(StaffFragment())
+            }
+           /* tvAllTaskData.setOnClickListener {
+                (context as DashboardActivity).replaceFragment(StaffFragment())
+            }*/
         }
 
         return root
@@ -115,7 +138,8 @@ class HomeFragment : Fragment(), ApiResponseListner {
                             viewAllLTask.setBackgroundColor(getResources().getColor(R.color.colorPrimary))
                             viewAllLTask.visibility = View.VISIBLE
                             viewAllLLead.visibility = View.INVISIBLE
-                            handleRcTodayLeadDash(dashboardBean.data.todayLead)
+                           // handleRcTodayLeadDash(dashboardBean.data.todayLead)
+                            (context as DashboardActivity).replaceFragment(StaffFragment())
                         }
 
                         tvAllLeads.setOnClickListener {
@@ -131,6 +155,15 @@ class HomeFragment : Fragment(), ApiResponseListner {
 
                     //  dashboardBeanData= DashboardBean.Data.TodayLead
                     handleRcAllLeadDash(dashboardBean.data.allLead)
+                    if (!dashboardBean.data.callVisitSchedule.isNullOrEmpty()){
+                        handleCallSechdule(dashboardBean.data.callVisitSchedule)
+                    }
+                    if (!dashboardBean.data.visitSchedule.isNullOrEmpty()){
+                        handleVistSechdule(dashboardBean.data.visitSchedule)
+                    }
+                    if (!dashboardBean.data.missedFollowup.isNullOrEmpty()){
+                        handleMissedFollowUp(dashboardBean.data.missedFollowup)
+                    }
 
                     binding.apply {
                         tvTotalLeads.setText(dashboardBean.data.allLeads.totalLeads.toString())
@@ -237,7 +270,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         menuList.add(
             MenuModelBean(
                 5,
-                "scheduled",
+                "call scheduled",
                 data.callScheduled.toString(),
                 R.drawable.ic_dashbord
             )
@@ -334,7 +367,48 @@ class HomeFragment : Fragment(), ApiResponseListner {
         return menuList
     }
 
-    fun handleRcTodayLeadDash(data: DashboardBean.Data.TodayLead) {
+    fun handleCallSechdule(data: List<DashboardBean.Data.CallVisitSchedule>) {
+        binding.rcCallSechudle.layoutManager =
+            LinearLayoutManager(requireContext())
+        var mAdapter = CallSechduleAdapter(requireActivity(), data, object :
+            RvStatusClickListner {
+            override fun clickPos(status: String, pos: Int) {
+
+            }
+        })
+        binding.rcCallSechudle.adapter = mAdapter
+        // rvMyAcFiled.isNestedScrollingEnabled = false
+
+    }
+
+    fun handleVistSechdule(data: List<DashboardBean.Data.VisitSchedule>) {
+        binding.rcVisitSechudle.layoutManager =
+            LinearLayoutManager(requireContext())
+        var mAdapter = VisitSechduleAdapter(requireActivity(), data, object :
+            RvStatusClickListner {
+            override fun clickPos(status: String, pos: Int) {
+
+            }
+        })
+        binding.rcVisitSechudle.adapter = mAdapter
+        // rvMyAcFiled.isNestedScrollingEnabled = false
+
+    }
+    fun handleMissedFollowUp(data: List<DashboardBean.Data.MissedFollowup>) {
+        binding.rcFollowUp.layoutManager =
+            LinearLayoutManager(requireContext())
+        var mAdapter = MissedFollowupAdapter(requireActivity(), data, object :
+            RvStatusClickListner {
+            override fun clickPos(status: String, pos: Int) {
+
+            }
+        })
+        binding.rcFollowUp.adapter = mAdapter
+        // rvMyAcFiled.isNestedScrollingEnabled = false
+
+    }
+
+   fun handleRcTodayLeadDash(data: DashboardBean.Data.TodayLead) {
         binding.rcDashboard.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         var mAdapter = DashTodayLeadAdapter(requireActivity(), getMenusTodayLead(data), object :
@@ -407,7 +481,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         menuList.add(
             MenuModelBean(
                 5,
-                "scheduled",
+                "call scheduled",
                 data.callScheduled.toString(),
                 R.drawable.ic_dashbord
             )
@@ -522,4 +596,5 @@ class HomeFragment : Fragment(), ApiResponseListner {
         super.onResume()
         //   apiAllGet()
     }
+
 }

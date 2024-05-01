@@ -1,6 +1,10 @@
 package com.example.rentalexpertz.Activity
 
 import android.app.*
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -22,6 +26,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.stpl.antimatter.Utils.ApiContants
+import java.io.File
 
 
 class ProfileActivity : AppCompatActivity(), ApiResponseListner,
@@ -29,7 +34,10 @@ class ProfileActivity : AppCompatActivity(), ApiResponseListner,
     ConnectivityListener.ConnectivityReceiverListener {
     private lateinit var binding: ActivityProfileBinding
     private lateinit var apiClient: ApiController
-
+    val CAMERA_PERMISSION_CODE1 = 123
+    var SELECT_PICTURES1 = 1
+    val PERMISSION_CODE = 12345
+    var file2: File? = null
     var myReceiver: ConnectivityListener? = null
     var activity: Activity = this
 
@@ -42,18 +50,90 @@ class ProfileActivity : AppCompatActivity(), ApiResponseListner,
                 WindowManager.LayoutParams.FLAG_SECURE
             );
         }
+      //  9390418924
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         myReceiver = ConnectivityListener()
         binding.igToolbar.tvTitle.text = "My Profile"
         binding.igToolbar.ivMenu.setImageDrawable(resources.getDrawable(R.drawable.ic_back_black))
         binding.igToolbar.ivMenu.setOnClickListener { finish() }
         binding.igToolbar.ivMenu.visibility = View.VISIBLE
+        ApiContants.requestCameraPermission(this, PERMISSION_CODE)
+
         val profileData = intent.getSerializableExtra("profileResponse") as ProfileBean.Data
         Log.d("zxvcxc", Gson().toJson(profileData))
+
         setData(profileData)
+
         binding.apply {
             btnSubmit.setOnClickListener {
 
+            }
+            binding.ivAddImage.setOnClickListener {
+                openCameraDialog(SELECT_PICTURES1, CAMERA_PERMISSION_CODE1)
+            }
+        }
+    }
+
+    fun openCameraDialog(SELECT_PICTURES: Int, CAMERA_PERMISSION_CODE: Int) {
+        val dialog: Dialog = GeneralUtilities.openBootmSheetDailog(
+            R.layout.dialog_camera, R.style.AppBottomSheetDialogTheme,
+            this
+        )
+        val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
+        val llInternalPhoto = dialog.findViewById<View>(R.id.llInternalPhoto) as LinearLayout
+        val llClickPhoto = dialog.findViewById<View>(R.id.llClickPhoto) as LinearLayout
+
+        llInternalPhoto.setOnClickListener {
+            dialog.dismiss()
+            ApiContants.requestCameraPermission(this, PERMISSION_CODE)
+            ApiContants.uploadImage(this, SELECT_PICTURES)
+        }
+
+        llClickPhoto.setOnClickListener {
+            dialog.dismiss()
+            ApiContants.requestCameraPermission(this, PERMISSION_CODE)
+            ApiContants.ClickPicCamera(this, CAMERA_PERMISSION_CODE)
+
+        }
+
+        ivClose.setOnClickListener { dialog.dismiss() }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == SELECT_PICTURES1) {
+            if (data?.getData() != null) {   // if single image is selected//Front
+
+                var imageUri: Uri = data.data!!
+                val picturePath: String = GeneralUtilities.getPath(
+                    applicationContext, imageUri
+                )
+                file2 = File(picturePath)
+                val myBitmap = BitmapFactory.decodeFile(file2!!.absolutePath)
+                binding.ivImage.setImageBitmap(myBitmap)
+
+                Log.d("SinglePicturePath", picturePath)
+                //   iv_image.setImageURI(imageUri) Here you can assign the picked image uri to your imageview
+            }
+
+        }
+
+
+        if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_PERMISSION_CODE1) {//Front
+            try {
+             //   Toast.makeText(this@ProfileActivity, "sdfsd", Toast.LENGTH_SHORT).show()
+
+                val imageBitmap = data?.extras?.get("data") as Bitmap
+                binding.ivImage.setImageBitmap(imageBitmap)
+                val tempUri = GeneralUtilities.getImageUri(applicationContext, imageBitmap)
+                file2 = File(GeneralUtilities.getRealPathFromURII(this, tempUri))
+                //  imgList.add(file2!!)
+                Log.e("Path", file2.toString())
+
+                //Toast.makeText(getContext(), ""+picturePath, Toast.LENGTH_SHORT).show();
+            } catch (e: java.lang.Exception) {
+                Log.e("Path Error", e.toString())
+                Toast.makeText(applicationContext, "" + e, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -93,7 +173,6 @@ class ProfileActivity : AppCompatActivity(), ApiResponseListner,
         Log.d("error", errorMessage)
 
     }
-
 
     override fun onStart() {
         super.onStart()

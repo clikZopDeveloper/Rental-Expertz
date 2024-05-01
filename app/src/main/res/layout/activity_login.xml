@@ -38,7 +38,7 @@
                 android:drawableStart="@drawable/ic_baseline_phone_iphone_24"
                 android:drawableTint="@color/colorPrimary"
                 android:drawablePadding="@dimen/_10dp"
-                android:text="9711428904"
+                android:text=""
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +60,7 @@
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:drawableTint="@color/colorPrimary"
                 android:drawablePadding="@dimen/_10dp"
-                android:text="123456"
+                android:text=""
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>

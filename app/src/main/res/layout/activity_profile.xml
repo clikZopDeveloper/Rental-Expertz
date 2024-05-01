@@ -41,6 +41,7 @@
                     tools:ignore="MissingConstraints">
 
                     <ImageView
+                        android:id="@+id/ivImage"
                         android:layout_width="@dimen/_70dip"
                         android:layout_height="@dimen/_70dip"
                         android:layout_centerInParent="true"
@@ -51,7 +52,19 @@
                         android:clickable="true"
                         android:foreground="@drawable/ripple_circle"
                         android:src="@drawable/add_file" />
-
+                    <ImageView
+                        android:id="@+id/ivAddImage"
+                        android:layout_width="@dimen/_25dp"
+                        android:layout_height="@dimen/_25dp"
+                        android:clickable="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:foreground="@drawable/ripple_circle"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@color/black"
+                        android:padding="@dimen/_2dip"
+                        android:src="@drawable/ic_baseline_add_24"
+                        android:tint="@color/white"/>
                 </RelativeLayout>
                 <TextView
                     android:layout_width="wrap_content"

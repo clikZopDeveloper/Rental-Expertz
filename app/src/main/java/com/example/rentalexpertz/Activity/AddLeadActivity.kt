@@ -1,7 +1,7 @@
 package com.example.rentalexpertz.Activity
 
 import android.app.Activity
-import android.content.Intent
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,6 +20,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.stpl.antimatter.Utils.ApiContants
+import java.util.Calendar
 
 
 class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
@@ -36,7 +37,7 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
     var classificationID = 0
     var sourceID = 0
     var typeID = 0
-    var campignID = 0
+    var campignName = ""
     var leadID = 0
 
     var way = ""
@@ -66,7 +67,6 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
                 binding.igToolbar.tvTitle.text = way
             } else {
                 try {
-
                     val wayResponse =
                         intent.getSerializableExtra("wayResponse") as AllLeadDataBean.Data
                     igToolbar.tvTitle.text = "Lead Update"
@@ -93,7 +93,7 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
                      classificationID = wayResponse.classificationId
                      sourceID = wayResponse.sourceId
                      typeID = wayResponse.typeId
-                     campignID = wayResponse.campaignId.toInt()
+                     campignName = wayResponse.campaign
 
                     Log.d("error>>>>>>>>>", Gson().toJson(wayResponse))
                 } catch (e: Exception) {
@@ -106,6 +106,46 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
             binding.btnSubmit.setOnClickListener {
                 apiAddLead()
             }
+binding.apply {
+
+    editDateDOB.setOnClickListener(View.OnClickListener {
+        val c = Calendar.getInstance()
+        val year = c[Calendar.YEAR]
+        val month = c[Calendar.MONTH]
+        val day = c[Calendar.DAY_OF_MONTH]
+        val datePickerDialog = DatePickerDialog(
+            this@AddLeadActivity,
+            { view, year, monthOfYear, dayOfMonth ->
+                //  dob.setText(dateofnews);
+                val dateofnews = "${ year.toString()+ "-"+(monthOfYear + 1).toString()  + "-" + dayOfMonth.toString() }"
+
+                //   val dateofnews = (monthOfYear + 1).toString() + "/" + dayOfMonth + "/" + year
+                editDateDOB.setText(dateofnews)
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
+    })
+    editDateDOA.setOnClickListener(View.OnClickListener {
+        val c = Calendar.getInstance()
+        val year = c[Calendar.YEAR]
+        val month = c[Calendar.MONTH]
+        val day = c[Calendar.DAY_OF_MONTH]
+        val datePickerDialog = DatePickerDialog(
+            this@AddLeadActivity,
+            { view, year, monthOfYear, dayOfMonth ->
+                //  dob.setText(dateofnews);
+                val dateofnews = "${ year.toString()+ "-"+(monthOfYear + 1).toString()  + "-" + dayOfMonth.toString() }"
+
+                //   val dateofnews = (monthOfYear + 1).toString() + "/" + dayOfMonth + "/" + year
+                editDateDOA.setText(dateofnews)
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
+    })
+}
+
         }
     }
 
@@ -118,8 +158,10 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
         params["state"] = binding.stateselector.text.toString()
         params["city"] = binding.cityselector.text.toString()
         params["address"] = binding.editAddress.text.toString()
-        params["campaign"] = campignID.toString()
+        params["campaign"] = campignName
         params["comment"] = binding.editComments.text.toString()
+        params["dob"] = binding.editDateDOB.text.toString()
+        params["doa"] = binding.editDateDOA.text.toString()
         params["type"] = typeID.toString()
         params["category_id"] = CatID.toString()
         params["sub_category_id"] = SubCatID.toString()
@@ -144,9 +186,16 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
         apiClient.getApiPostCall(ApiContants.getSource, params)
         apiClient.getApiPostCall(ApiContants.getCampigns, params)
         apiClient.getApiPostCall(ApiContants.getType, params)
-        apiClient.getApiPostCall(ApiContants.getCategory, params)
         apiClient.getApiPostCall(ApiContants.getClassification, params)
         apiClient.getApiPostCall(ApiContants.getProject, params)
+    }
+
+    fun apiCategory(typeID: String) {
+        SalesApp.isAddAccessToken = true
+        val params = Utility.getParmMap()
+        params["typeid"] = typeID
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.getCategory, params)
     }
 
     fun apiCity(stateName: String) {
@@ -160,7 +209,7 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
     fun apiSubCatory(subCatId: Int) {
         SalesApp.isAddAccessToken = true
         val params = Utility.getParmMap()
-        params["catg_id"] = subCatId.toString()
+        params["category_id"] = subCatId.toString()
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.getSubCategory, params)
     }
@@ -401,7 +450,7 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
                     )
                 ) {
                     binding.cityCampigns.setText(parent.getItemAtPosition(position).toString())
-                    campignID = catData.id
+                    campignName = catData.campaignName
                     Log.d("StateID", "" + catData.id)
                 }
             }
@@ -442,6 +491,7 @@ class AddLeadActivity : AppCompatActivity(), ApiResponseListner,
                     binding.stateType.setText(parent.getItemAtPosition(position).toString())
                     typeID = catData.id
                     Log.d("StateID", "" + catData.id)
+                    apiCategory(typeID.toString())
                 }
             }
             Toast.makeText(

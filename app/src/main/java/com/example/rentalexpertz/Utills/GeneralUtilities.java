@@ -94,15 +94,15 @@ import java.util.regex.Pattern;
 
 public class GeneralUtilities {
     private Context context;
-
+    public static final GeneralUtilities utility = new GeneralUtilities();
     private static Dialog dialog;
 
     public static Intent intent;
 
-    public GeneralUtilities(Context context) {
-        this.context = context;
-    }
 
+    public static GeneralUtilities getInstance() {
+        return utility;
+    }
     public static void down(Context context,String url){
         DownloadManager manager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
         Uri uri = Uri.parse(url);
@@ -131,6 +131,15 @@ public class GeneralUtilities {
         return  Uri.parse(path);
     }
 
+    public void makeCall(Context context, String mob) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + mob));
+            context.startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(context, "Unable to call at this time", Toast.LENGTH_SHORT).show();
+        }
+    }
     public static String getRealPathFromURII(Context context,Uri uri) {
         String path = "";
         if (context.getContentResolver() != null) {

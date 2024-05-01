@@ -18,6 +18,12 @@ data class DashboardBean(
         val allLeads: AllLeads,
         @SerializedName("today_lead")
         val todayLead: TodayLead,
+        @SerializedName("call_visit_schedule")
+        val callVisitSchedule: List<CallVisitSchedule>,
+        @SerializedName("visit_schedule")
+        val visitSchedule: List<VisitSchedule>,
+        @SerializedName("missed_followup")
+        val missedFollowup: List<MissedFollowup>,
         @SerializedName("today_leads")
         val todayLeads: TodayLeads
     ) {
@@ -58,7 +64,192 @@ data class DashboardBean(
             @SerializedName("total_leads")
             val totalLeads: Int // 3
         )
-
+        data class CallVisitSchedule(
+            @SerializedName("address")
+            val address: String,
+            @SerializedName("agent_id")
+            val agentId: Int,
+            @SerializedName("campaign")
+            val campaign: String,
+            @SerializedName("campaign_id")
+            val campaignId: String,
+            @SerializedName("category")
+            val category: String,
+            @SerializedName("category_id")
+            val categoryId: Int,
+            @SerializedName("city")
+            val city: String,
+            @SerializedName("classification")
+            val classification: String,
+            @SerializedName("classification_id")
+            val classificationId: Int,
+            @SerializedName("client_id")
+            val clientId: Int,
+            @SerializedName("comments")
+            val comments: String,
+            @SerializedName("created_date")
+            val createdDate: String,
+            @SerializedName("doa")
+            val doa: String,
+            @SerializedName("dob")
+            val dob: String,
+            @SerializedName("email")
+            val email: String,
+            @SerializedName("id")
+            val id: Int,
+            @SerializedName("last_updated")
+            val lastUpdated: String,
+            @SerializedName("mobile")
+            val mobile: String,
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("project")
+            val project: String,
+            @SerializedName("project_id")
+            val projectId: Int,
+            @SerializedName("remind")
+            val remind: String,
+            @SerializedName("source")
+            val source: String,
+            @SerializedName("source_id")
+            val sourceId: Int,
+            @SerializedName("state")
+            val state: String,
+            @SerializedName("status")
+            val status: String,
+            @SerializedName("sub_category")
+            val subCategory: String,
+            @SerializedName("sub_category_id")
+            val subCategoryId: Int,
+            @SerializedName("type")
+            val type: String,
+            @SerializedName("type_id")
+            val typeId: Int
+        )
+        data class MissedFollowup(
+            @SerializedName("address")
+            val address: String,
+            @SerializedName("agent_id")
+            val agentId: Int,
+            @SerializedName("campaign")
+            val campaign: String,
+            @SerializedName("campaign_id")
+            val campaignId: String,
+            @SerializedName("category")
+            val category: String,
+            @SerializedName("category_id")
+            val categoryId: Int,
+            @SerializedName("city")
+            val city: String,
+            @SerializedName("classification")
+            val classification: String,
+            @SerializedName("classification_id")
+            val classificationId: Int,
+            @SerializedName("client_id")
+            val clientId: Int,
+            @SerializedName("comments")
+            val comments: String,
+            @SerializedName("created_date")
+            val createdDate: String,
+            @SerializedName("doa")
+            val doa: String,
+            @SerializedName("dob")
+            val dob: String,
+            @SerializedName("email")
+            val email: String,
+            @SerializedName("id")
+            val id: Int,
+            @SerializedName("last_updated")
+            val lastUpdated: String,
+            @SerializedName("mobile")
+            val mobile: String,
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("project")
+            val project: String,
+            @SerializedName("project_id")
+            val projectId: Int,
+            @SerializedName("remind")
+            val remind: String,
+            @SerializedName("source")
+            val source: String,
+            @SerializedName("source_id")
+            val sourceId: Int,
+            @SerializedName("state")
+            val state: String,
+            @SerializedName("status")
+            val status: String,
+            @SerializedName("sub_category")
+            val subCategory: String,
+            @SerializedName("sub_category_id")
+            val subCategoryId: Int,
+            @SerializedName("type")
+            val type: String,
+            @SerializedName("type_id")
+            val typeId: Int
+        )
+        data class VisitSchedule(
+            @SerializedName("address")
+            val address: String,
+            @SerializedName("agent_id")
+            val agentId: Int,
+            @SerializedName("campaign")
+            val campaign: String,
+            @SerializedName("campaign_id")
+            val campaignId: String,
+            @SerializedName("category")
+            val category: String,
+            @SerializedName("category_id")
+            val categoryId: Int,
+            @SerializedName("city")
+            val city: String,
+            @SerializedName("classification")
+            val classification: String,
+            @SerializedName("classification_id")
+            val classificationId: Int,
+            @SerializedName("client_id")
+            val clientId: Int,
+            @SerializedName("comments")
+            val comments: String,
+            @SerializedName("created_date")
+            val createdDate: String,
+            @SerializedName("doa")
+            val doa: Any,
+            @SerializedName("dob")
+            val dob: Any,
+            @SerializedName("email")
+            val email: String,
+            @SerializedName("id")
+            val id: Int,
+            @SerializedName("last_updated")
+            val lastUpdated: String,
+            @SerializedName("mobile")
+            val mobile: String,
+            @SerializedName("name")
+            val name: String,
+            @SerializedName("project")
+            val project: String,
+            @SerializedName("project_id")
+            val projectId: Int,
+            @SerializedName("remind")
+            val remind: String,
+            @SerializedName("source")
+            val source: String,
+            @SerializedName("source_id")
+            val sourceId: Int,
+            @SerializedName("state")
+            val state: String,
+            @SerializedName("status")
+            val status: String,
+            @SerializedName("sub_category")
+            val subCategory: String,
+            @SerializedName("sub_category_id")
+            val subCategoryId: Int,
+            @SerializedName("type")
+            val type: String,
+            @SerializedName("type_id")
+            val typeId: Int
+        )
         data class TodayLead(
             @SerializedName("call_scheduled")
             val callScheduled: String, // 0
