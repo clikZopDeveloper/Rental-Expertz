@@ -38,21 +38,23 @@ class MissedFollowupAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.setIsRecyclable(false)
 
-        holder.tvStatus.text = mFilteredList[position].status.toString()
+        holder.tvLeadID.text = mFilteredList[position].id.toString()
+        holder.tvCampaign.text = mFilteredList[position].campaign.toString()
         holder.tvName.text = mFilteredList[position].name.toString()
-        holder.tvMobNo.text = mFilteredList[position].mobile.toString()
-        holder.tvEmailID.text = mFilteredList[position].email.toString()
+        holder.tvClassification.text = mFilteredList[position].classification.toString()
+        holder.tvComment.text = mFilteredList[position].comments.toString()
         holder.tvDate.text = mFilteredList[position].createdDate.toString()
 
-      /*  if (mFilteredList[position].status.equals("Complete")) {
-            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
-        } else if (mFilteredList[position].status.equals("Pending")) {
-            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.yellow_color))
-        } else {
-            holder.tvStatus.setTextColor(
-                context.getResources().getColor(R.color.paymentsdk_color_red)
-            )
-        }*/
+
+        /*  if (mFilteredList[position].status.equals("Complete")) {
+              holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
+          } else if (mFilteredList[position].status.equals("Pending")) {
+              holder.tvStatus.setTextColor(context.getResources().getColor(R.color.yellow_color))
+          } else {
+              holder.tvStatus.setTextColor(
+                  context.getResources().getColor(R.color.paymentsdk_color_red)
+              )
+          }*/
 
         // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
@@ -70,10 +72,11 @@ class MissedFollowupAdapter(
     }
 
     inner class MyViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
-        val tvStatus: TextView = itemview.findViewById(R.id.tvStatus)
+        val tvLeadID: TextView = itemview.findViewById(R.id.tvLeadID)
+        val tvCampaign: TextView = itemview.findViewById(R.id.tvCampaign)
         val tvName: TextView = itemview.findViewById(R.id.tvName)
-        val tvMobNo: TextView = itemview.findViewById(R.id.tvMobNo)
-        val tvEmailID: TextView = itemview.findViewById(R.id.tvEmailID)
+        val tvClassification: TextView = itemview.findViewById(R.id.tvClassification)
+        val tvComment: TextView = itemview.findViewById(R.id.tvComment)
         val tvDate: TextView = itemview.findViewById(R.id.tvDate)
     }
 

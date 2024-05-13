@@ -152,7 +152,7 @@
                     android:background="@drawable/btn_round_shape_white"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="Update"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:padding="@dimen/_4dip"
                     android:layout_marginStart="@dimen/_5dip" />
             </LinearLayout>

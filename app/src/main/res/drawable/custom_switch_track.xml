@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:drawable="@color/green"/> &lt;!&ndash; Green when checked/on &ndash;&gt;
+    <item android:drawable="@color/white"/> &lt;!&ndash; Red when unchecked/off &ndash;&gt;
+</selector>-->
+
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/title_bar_icon"/>
+            <size android:width="20dp" android:height="@dimen/_20dip" />
+            <corners android:radius="24dp"/> <!-- Adjust radius as needed -->
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/title_bar_icon"/>
+            <corners android:radius="24dp"/> <!-- Adjust radius as needed -->
+        </shape>
+    </item>
+</selector>

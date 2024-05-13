@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     615AC4
-    <color name="purple_200">#F8D032</color>
-    <color name="purple_500">#F8D032</color>
-    <color name="purple_700">#F8D032</color>
-    <color name="teal_200">#F8D032</color>
-    <color name="teal_700">#F8D032</color>
+    <color name="purple_200">#615AC4</color>
+    <color name="purple_500">#615AC4</color>
+    <color name="purple_700">#615AC4</color>
+    <color name="teal_200">#615AC4</color>
+    <color name="teal_700">#615AC4</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent_black">#66000000</color>
-    <color name="colorPrimary">#F8D032</color>
-    <color name="colorPrimaryDark">#F8D032</color>
-    <color name="colorAccent">#F8D032</color>
+    <color name="colorPrimary">#615AC4</color>
+    <color name="colorPrimaryDark">#615AC4</color>
+    <color name="colorAccent">#615AC4</color>
     <color name="color_ice_cream">#F0F2F5</color>
     <color name="normalcolor">#009926</color>
     <color name="errorcolor">#b90609</color>
-    <color name="app_color">#F8D032</color>
+    <color name="app_color">#615AC4</color>
     <color name="light_primar_color">#D8F0C4</color>
   <!--  <color name="vlight_primar_color">#EFF9E7</color>-->
     <color name="vlight_primar_color">#BCDDFF</color>
-    <color name="dark_primar_color">#F8D032</color>
+    <color name="dark_primar_color">#615AC4</color>
     <color name="text_color">#808184</color>
     <color name="yellow_color">#FBC517</color>
  <!--   <color name="v_blue_color">#E4E6EC</color>-->
-    <color name="v_blue_color">#FDF19A</color>
+    <color name="v_blue_color">#C9C4E9</color>
     <color name="v__blue_color">#C9C4E9</color>
-    <color name="blue_100">#E4E6EC</color>
+    <color name="blue_100">#DBD9EF</color>
 
 
 
@@ -82,6 +82,9 @@
     <color name="dashbackground">#e5f1f0</color>
     <color name="darktheme">#145467</color>
     <color name="referback">#0381ff</color>
+    <color name="sub_tab_color">#E9E8F6</color>
+    <color name="sub_item_color">#F7F7F7</color>
+    <color name="title_bar_icon">#C3BEF1</color>
 
 
     <!--multiple file selection color-->

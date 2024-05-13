@@ -379,6 +379,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         menuList.add(MenuModelBean(12, "wrong number", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(13, "not reachable", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(14, "channel partner", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(15, "future lead", "", R.drawable.ic_dashbord))
 
         return menuList
     }

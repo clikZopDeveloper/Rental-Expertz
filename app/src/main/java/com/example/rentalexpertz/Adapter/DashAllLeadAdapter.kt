@@ -15,7 +15,7 @@ import com.example.rentalexpertz.Utills.RvStatusClickListner
 class DashAllLeadAdapter(var context: Activity, var list: ArrayList<MenuModelBean>, var rvClickListner: RvStatusClickListner) : RecyclerView.Adapter<DashAllLeadAdapter.MyViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder { // infalte the item Layout
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_home_allleads, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_home_leadtype, parent, false)
         return MyViewHolder(v)
     }
 
@@ -30,9 +30,9 @@ class DashAllLeadAdapter(var context: Activity, var list: ArrayList<MenuModelBea
         holder.tvAdd.visibility = View.VISIBLE*/
 
 
-        holder.tvUpPrice.text= list[position].title
+        holder.tvtitle.text= list[position].title
        // holder.tvSubTitle.text= list[position].subTitle
-        holder.tvUpServiceName.text= list[position].subTitle
+        holder.tvTodayLeads.text= list[position].subTitle
   //      holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
       /*  if ("Retailer"=="Retailer"){
@@ -73,8 +73,8 @@ class DashAllLeadAdapter(var context: Activity, var list: ArrayList<MenuModelBea
 
     inner class MyViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
    //     val ivImage: ImageView = itemview.findViewById(R.id.ivImage)
-       val tvUpPrice: TextView = itemview.findViewById(R.id.tvUpPrice)
-       val tvUpServiceName: TextView = itemview.findViewById(R.id.tvUpServiceName)
+       val tvtitle: TextView = itemview.findViewById(R.id.tvtitle)
+       val tvTodayLeads: TextView = itemview.findViewById(R.id.tvTodayLeads)
     }
 
 }

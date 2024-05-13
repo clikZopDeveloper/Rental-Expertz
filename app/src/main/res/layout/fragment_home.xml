@@ -27,27 +27,26 @@
                     android:layout_marginHorizontal="@dimen/_5dip"
                     android:background="@color/white"
                     android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_20dip"
                     tools:context=".Fragment.HomeFragment">
 
                     <ImageView
                         android:layout_width="@dimen/_170dp"
                         android:layout_height="@dimen/_100dip"
                         android:layout_gravity="center"
+                        android:visibility="gone"
                         android:src="@drawable/app_logo" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/_5dip"
-                        android:layout_marginTop="@dimen/_20dip"
                         android:orientation="horizontal">
 
                         <EditText
                             android:id="@+id/edSearch"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_5dip"
-                            android:layout_marginBottom="@dimen/_5dip"
                             android:layout_weight="1"
                             android:background="@drawable/btn_border_shape"
                             android:drawableStart="@drawable/ic_search_black_24dp"
@@ -67,8 +66,8 @@
                             android:layout_alignParentEnd="true"
                             android:layout_alignParentBottom="true"
                             android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_10dp"
-                            android:layout_marginEnd="@dimen/_10dp"
+                            android:layout_marginStart="@dimen/_5dip"
+                            android:layout_marginEnd="@dimen/_5dip"
                             android:layout_marginBottom="@dimen/_10dp"
                             android:src="@drawable/ic_search_black_24dp"
                             app:tint="@android:color/white" />
@@ -138,134 +137,63 @@
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rcDashboard"
+                        android:id="@+id/rcLeadType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:itemCount="4"
-                        tools:listitem="@layout/item_home_allleads" />
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_home_leadtype" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+
+                    <RadioGroup
+                        android:id="@+id/rlButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5dip"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:layout_below="@+id/ivClose"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:orientation="horizontal">
 
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        <RadioButton
+                            android:id="@+id/btn1"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/btn_border_shape"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_4dip">
+                            android:background="@drawable/tab"
+                            android:button="@null"
+                            android:checked="true"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10dp"
+                            android:paddingVertical="@dimen/_6dp"
+                            android:text="Call Schedule"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:id="@+id/tvTodayLeads"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_5dip"
-                                android:fontFamily="@font/roboto_bold"
-                                android:paddingVertical="@dimen/_6dp"
-                                android:text="fetching..."
-                                android:textColor="@color/text_color"
-                                android:textSize="@dimen/_14sp" />
-
-                            <View
-                                android:id="@+id/viewTodayLead"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_2dip"
-                                android:layout_below="@+id/tvTodayLeads"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="@dimen/_5dip"
-                                android:layout_toLeftOf="@+id/ivMImage"
-                                android:background="@color/colorPrimary" />
-
-                            <ImageView
-                                android:id="@+id/ivMImage"
-                                android:layout_width="@dimen/_30dip"
-                                android:layout_height="@dimen/_30dip"
-                                android:layout_below="@+id/tvTodayLeads"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginStart="@dimen/_5dip"
-                                android:src="@drawable/ic_dashbord" />
-
-                            <TextView
-                                android:id="@+id/tvtitle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/ivMImage"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_5dip"
-                                android:layout_marginBottom="@dimen/_5dip"
-                                android:fontFamily="@font/roboto_bold"
-                                android:paddingVertical="@dimen/_4dip"
-                                android:text="Today Lead"
-                                android:textColor="@color/text_color"
-                                android:textSize="@dimen/_16sp" />
-                        </RelativeLayout>
-
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        <RadioButton
+                            android:id="@+id/btn2"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5dip"
-                            android:layout_weight="1"
-                            android:background="@drawable/btn_border_shape"
-                            android:orientation="vertical"
-                            android:padding="@dimen/_4dip">
-
-                            <TextView
-                                android:id="@+id/tvTotalLeads"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_5dip"
-                                android:fontFamily="@font/roboto_bold"
-                                android:paddingVertical="@dimen/_6dp"
-                                android:text="fetching..."
-                                android:textColor="@color/text_color"
-                                android:textSize="@dimen/_14sp" />
-
-                            <View
-                                android:id="@+id/viewTodayLeadData"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_2dip"
-                                android:layout_below="@+id/tvTotalLeads"
-                                android:layout_marginTop="15dp"
-                                android:layout_marginEnd="@dimen/_5dip"
-                                android:layout_toLeftOf="@+id/ivLImage"
-                                android:background="@color/colorPrimary" />
-
-                            <ImageView
-                                android:id="@+id/ivLImage"
-                                android:layout_width="@dimen/_30dip"
-                                android:layout_height="@dimen/_30dip"
-                                android:layout_below="@+id/tvTotalLeads"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginStart="@dimen/_5dip"
-                                android:src="@drawable/ic_dashbord" />
-
-                            <TextView
-                                android:id="@+id/tvtitle2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/ivLImage"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_5dip"
-                                android:layout_marginBottom="@dimen/_5dip"
-                                android:fontFamily="@font/roboto_bold"
-                                android:paddingVertical="@dimen/_4dip"
-                                android:text="TotalLeads"
-                                android:textColor="@color/text_color"
-                                android:textSize="@dimen/_16sp" />
-                        </RelativeLayout>
-
-
-                    </LinearLayout>
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/tab"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10dp"
+                            android:paddingVertical="6dp"
+                            android:text="Visit Schedule"
+                            android:textColor="@color/black" />
+                        <RadioButton
+                            android:id="@+id/btn3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/tab"
+                            android:button="@null"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/_10dp"
+                            android:paddingVertical="6dp"
+                            android:text="Missed Follow Up"
+                            android:textColor="@color/black" />
+                    </RadioGroup>
 
                     <HorizontalScrollView
                         android:layout_width="match_parent"
@@ -276,174 +204,121 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="6dp"
-                            android:layout_margin="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14sp"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="Call Schedule"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5dip"
-                        android:weightSum="3"
+                        android:layout_marginTop="@dimen/_10dp"
                         android:paddingVertical="@dimen/_6dp"
-                        android:background="@color/colorPrimary"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Name "
+                            android:text="Lead ID"
+                            android:paddingHorizontal="5dp"
                             android:gravity="center"
-                            android:layout_weight="1"
                             android:layout_gravity="center"
+                            android:paddingVertical="10dp"
+                            android:background="@drawable/btn_round_shape_white"
+                            android:backgroundTint="@color/sub_tab_color"
                             android:fontFamily="@font/quicksand_bold"
                             android:textSize="@dimen/_14sp" />
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mobile No "
+                            android:text="Name"
+                            android:paddingHorizontal="5dp"
                             android:gravity="center"
-                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
                             android:layout_gravity="center"
+                            android:paddingVertical="10dp"
+                            android:background="@drawable/btn_round_shape_white"
+                            android:backgroundTint="@color/sub_tab_color"
                             android:fontFamily="@font/quicksand_bold"
                             android:textSize="@dimen/_14sp" />
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email ID "
-                            android:layout_weight="1"
+                            android:text="Campaign"
+                            android:paddingHorizontal="5dp"
                             android:gravity="center"
+                            android:layout_marginStart="4dp"
                             android:layout_gravity="center"
+                            android:paddingVertical="10dp"
+                            android:background="@drawable/btn_round_shape_white"
+                            android:backgroundTint="@color/sub_tab_color"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:textSize="@dimen/_14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Classification"
+                            android:gravity="center"
+                            android:paddingHorizontal="5dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_gravity="center"
+                            android:paddingVertical="10dp"
+                            android:background="@drawable/btn_round_shape_white"
+                            android:backgroundTint="@color/sub_tab_color"
+                            android:fontFamily="@font/quicksand_bold"
+                            android:textSize="@dimen/_14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Last Comment"
+                            android:paddingHorizontal="5dp"
+                            android:gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:layout_gravity="center"
+                            android:paddingVertical="10dp"
+                            android:background="@drawable/btn_round_shape_white"
+                            android:backgroundTint="@color/sub_tab_color"
                             android:fontFamily="@font/quicksand_bold"
                             android:textSize="@dimen/_14sp" />
 
                     </LinearLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rcCallSechudle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="2"
+                        android:layout_marginTop="@dimen/_10dp"
                         tools:listitem="@layout/item_call_sechdule" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="6dp"
-                            android:layout_margin="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14sp"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="Visit Schedule"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5dip"
-                            android:weightSum="3"
-                            android:paddingVertical="@dimen/_6dp"
-                            android:background="@color/colorPrimary"
-                            android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Name "
-                                android:gravity="center"
-                                android:layout_weight="1"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/quicksand_bold"
-                                android:textSize="@dimen/_14sp" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Mobile No "
-                                android:gravity="center"
-                                android:layout_weight="1"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/quicksand_bold"
-                                android:textSize="@dimen/_14sp" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Email ID "
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/quicksand_bold"
-                                android:textSize="@dimen/_14sp" />
-
-                        </LinearLayout>
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcVisitSechudle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/item_call_sechdule" />
-
-                       <TextView
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           android:padding="6dp"
-                           android:layout_margin="5dp"
-                           android:textColor="@color/black"
-                           android:textSize="@dimen/_14sp"
-                           android:layout_gravity="center"
-                           android:gravity="center"
-                           android:text="Missed Follow Up"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5dip"
-                            android:weightSum="3"
-                            android:paddingVertical="@dimen/_6dp"
-                            android:background="@color/colorPrimary"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Name "
-                                android:gravity="center"
-                                android:layout_weight="1"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/quicksand_bold"
-                                android:textSize="@dimen/_14sp" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Mobile No "
-                                android:gravity="center"
-                                android:layout_weight="1"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/quicksand_bold"
-                                android:textSize="@dimen/_14sp" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Email ID "
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/quicksand_bold"
-                                android:textSize="@dimen/_14sp" />
-
-                        </LinearLayout>
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rcFollowUp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/item_call_sechdule" />
                         </LinearLayout>
                     </HorizontalScrollView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcDashboard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_home_leadtype" />
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+android:text="Channel Partners"
+    android:textSize="@dimen/_16sp"
+    android:textColor="@color/black"
+    android:textStyle="bold"
+    android:padding="@dimen/_4dip"
+    android:layout_margin="@dimen/_5dip"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rcChannelPartner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="2"
+                        android:layout_marginTop="@dimen/_5dip"
+                        tools:listitem="@layout/item_channel_patnr" />
+
                 </LinearLayout>
 
 
@@ -463,6 +338,9 @@
                 android:layout_marginBottom="@dimen/_10dp"
                 android:src="@drawable/ic_baseline_add_24"
                 app:tint="@android:color/white" />
+
+
+
         </RelativeLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

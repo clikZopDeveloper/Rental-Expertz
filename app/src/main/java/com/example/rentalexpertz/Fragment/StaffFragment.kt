@@ -169,16 +169,16 @@ var type=""
         binding.rcTask.adapter = mAllAdapter
         mAllAdapter.notifyDataSetChanged()
         binding.tvPending.setOnClickListener {
-            binding.tvPending.setTextColor(getResources().getColor(R.color.black));
-            binding.tvSucess.setTextColor(getResources().getColor(R.color.white));
+            binding.tvPending.setTextColor(getResources().getColor(R.color.white));
+            binding.tvSucess.setTextColor(getResources().getColor(R.color.black));
             type="Pending"
             if (data != null) {
                 mAllAdapter.filter.filter(type)
             }
         }
         binding.tvSucess.setOnClickListener {
-            binding.tvPending.setTextColor(getResources().getColor(R.color.white));
-            binding.tvSucess.setTextColor(getResources().getColor(R.color.black));
+            binding.tvPending.setTextColor(getResources().getColor(R.color.black));
+            binding.tvSucess.setTextColor(getResources().getColor(R.color.white));
             type="Complete"
             if (data != null) {
                 mAllAdapter.filter.filter(type)

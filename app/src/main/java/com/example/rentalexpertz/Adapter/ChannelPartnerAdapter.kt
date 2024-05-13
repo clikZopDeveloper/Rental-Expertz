@@ -21,39 +21,36 @@ import com.example.rentalexpertz.Utills.RvStatusClickListner
 import com.stpl.antimatter.Utils.ApiContants
 
 
-class CallSechduleAdapter(
+class ChannelPartnerAdapter(
     var context: Activity,
-    var mFilteredList: List<DashboardBean.Data.CallSchedule>,
+    var mFilteredList: List<DashboardBean.Data.ChannelPartner>,
     var rvClickListner: RvStatusClickListner
-) : RecyclerView.Adapter<CallSechduleAdapter.MyViewHolder>(){
+) : RecyclerView.Adapter<ChannelPartnerAdapter.MyViewHolder>(){
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): MyViewHolder { // infalte the item Layout
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_call_sechdule, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_channel_patnr, parent, false)
         return MyViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.setIsRecyclable(false)
 
-        holder.tvLeadID.text = mFilteredList[position].id.toString()
-        holder.tvCampaign.text = mFilteredList[position].campaign.toString()
         holder.tvName.text = mFilteredList[position].name.toString()
-        holder.tvClassification.text = mFilteredList[position].classification.toString()
-        holder.tvComment.text = mFilteredList[position].comments.toString()
-        holder.tvDate.text = mFilteredList[position].createdDate.toString()
+        holder.tvNumber.text = mFilteredList[position].mobile.toString()
+        holder.tvCity.text = mFilteredList[position].city.toString()
 
-      /*  if (mFilteredList[position].status.equals("Complete")) {
-            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
-        } else if (mFilteredList[position].status.equals("Pending")) {
-            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.yellow_color))
-        } else {
-            holder.tvStatus.setTextColor(
-                context.getResources().getColor(R.color.paymentsdk_color_red)
-            )
-        }*/
+        /*  if (mFilteredList[position].status.equals("Complete")) {
+              holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
+          } else if (mFilteredList[position].status.equals("Pending")) {
+              holder.tvStatus.setTextColor(context.getResources().getColor(R.color.yellow_color))
+          } else {
+              holder.tvStatus.setTextColor(
+                  context.getResources().getColor(R.color.paymentsdk_color_red)
+              )
+          }*/
 
         // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
@@ -71,12 +68,10 @@ class CallSechduleAdapter(
     }
 
     inner class MyViewHolder(itemview: View) : RecyclerView.ViewHolder(itemview) {
-        val tvLeadID: TextView = itemview.findViewById(R.id.tvLeadID)
-        val tvCampaign: TextView = itemview.findViewById(R.id.tvCampaign)
         val tvName: TextView = itemview.findViewById(R.id.tvName)
-        val tvClassification: TextView = itemview.findViewById(R.id.tvClassification)
-        val tvComment: TextView = itemview.findViewById(R.id.tvComment)
-        val tvDate: TextView = itemview.findViewById(R.id.tvDate)
+        val tvNumber: TextView = itemview.findViewById(R.id.tvNumber)
+        val tvCity: TextView = itemview.findViewById(R.id.tvCity)
+
     }
 
 

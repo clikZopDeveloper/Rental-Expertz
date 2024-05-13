@@ -38,11 +38,10 @@ public class ApiContants {
         const val dayStatus = "dayStatus"
 
 ///////////////////Testing URL////////////////////////////////////////
-           const val BaseUrl="https://rental.leadsexpertz.com//api/"//Testing URL
+           const val BaseUrl="https://rental.leadsexpertz.com/api/"//Testing URL
            const val ImageBaseUrl = "https://www.art.antimatterfit.com/"//Testing URL
            const val ImageBaseUrlWhyChoose = "https://www.art.antimatterfit.com/public/images/"//Testing URL
            const val VideoBaseUrl = "https://www.art.antimatterfit.com/"//Testing URL
-
 
         const val success = "success"
         const val failure = "failure"
@@ -75,6 +74,7 @@ public class ApiContants {
         const val SearchLead = "search-lead"
         const val GetTaskList = "task-list"
         const val GetUpdateTask = "update-task"
+        const val startDay = "start-day"
         const val endDay = "end-day"
         const val GetAddTask = "add-task"
         const val AllLeadData = "lead-data"

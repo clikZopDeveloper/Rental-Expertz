@@ -9,15 +9,12 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_2dip"
+       android:layout_margin="@dimen/_5dip"
         app:cardBackgroundColor="@color/sub_item_color"
         android:layout_marginBottom="@dimen/_5dip"
         app:cardCornerRadius="@dimen/_5dip">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fillViewport="true">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -29,63 +26,49 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2.5"
+                    android:layout_weight="3"
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvLeadID"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/_5dip"
-                        android:layout_weight="0.5"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_round_shape_white"
+                        android:backgroundTint="@color/light_grays"
                         android:fontFamily="@font/quicksand_bold"
                         android:paddingVertical="4dp"
-                        android:text="fetch..."
+                        android:text="Name"
+                        android:gravity="center"
                         android:textSize="@dimen/_14sp" />
 
                     <TextView
-                        android:id="@+id/tvName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_5dip"
                         android:fontFamily="@font/quicksand_bold"
                         android:paddingVertical="4dp"
-                        android:text="fetch..."
+                        android:text="Number"
+                        android:background="@drawable/btn_round_shape_white"
+                        android:backgroundTint="@color/light_grays"
+                        android:gravity="center"
                         android:textSize="@dimen/_14sp" />
 
                     <TextView
-                        android:id="@+id/tvCampaign"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="0.5"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_5dip"
+                        android:background="@drawable/btn_round_shape_white"
+                        android:backgroundTint="@color/light_grays"
                         android:fontFamily="@font/quicksand_bold"
                         android:paddingVertical="4dp"
-                        android:text="fetch..."
-                        android:textSize="@dimen/_14sp" />
-
-                    <TextView
-                        android:id="@+id/tvClassification"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.5"
-                        android:fontFamily="@font/quicksand_bold"
-                        android:paddingVertical="4dp"
-                        android:text="fetch..."
-                        android:textSize="@dimen/_14sp" />
-
-                    <TextView
-                        android:id="@+id/tvComment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="0.5"
-                        android:fontFamily="@font/quicksand_bold"
-                        android:paddingVertical="4dp"
-                        android:text="fetch..."
+                        android:text="City"
+                        android:gravity="center"
                         android:textSize="@dimen/_14sp" />
 
                 </LinearLayout>
@@ -93,30 +76,54 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:layout_weight="3"
+                    android:layout_marginTop="@dimen/_7dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tvDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/quicksand_bold"
-                        android:text=" "
-                        android:textSize="@dimen/_12sp" />
-
-                    <TextView
-                        android:id="@+id/tvStatus"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvName"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_5dip"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:fontFamily="@font/quicksand_bold"
-                        android:padding="@dimen/_2dip"
-                        android:text=" "
+                        android:paddingVertical="4dp"
+                        android:text="fetch..."
                         android:textSize="@dimen/_14sp" />
+
+                    <TextView
+                        android:id="@+id/tvNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_5dip"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:paddingVertical="4dp"
+                        android:text="fetch..."
+                        android:textSize="@dimen/_14sp" />
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/_5dip"
+                        android:gravity="center"
+                        android:fontFamily="@font/quicksand_bold"
+                        android:paddingVertical="4dp"
+                        android:text="fetch..."
+                        android:textSize="@dimen/_14sp" />
+
                 </LinearLayout>
+
+
             </LinearLayout>
-        </HorizontalScrollView>
+
 
     </androidx.cardview.widget.CardView>
 
