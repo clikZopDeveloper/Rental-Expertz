@@ -58,7 +58,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
         apiAllGet()
         apiCallDashboard()
 
-
         binding.apply {
             refreshLayout.setOnRefreshListener {
                 apiCallDashboard()
@@ -474,6 +473,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         mAdapter.notifyDataSetChanged()
 
     }
+
     fun handleChannelPartner(data: List<DashboardBean.Data.ChannelPartner>) {
         binding.rcChannelPartner.layoutManager =
             LinearLayoutManager(requireContext())

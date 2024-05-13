@@ -37,7 +37,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/btn_round_shape_white"
                         android:backgroundTint="@color/light_grays"
-                        android:fontFamily="@font/quicksand_bold"
+                        android:fontFamily="@font/roboto_regular"
                         android:paddingVertical="4dp"
                         android:text="Name"
                         android:gravity="center"
@@ -49,7 +49,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:layout_marginStart="@dimen/_5dip"
-                        android:fontFamily="@font/quicksand_bold"
+                        android:fontFamily="@font/roboto_regular"
                         android:paddingVertical="4dp"
                         android:text="Number"
                         android:background="@drawable/btn_round_shape_white"
@@ -65,7 +65,7 @@
                         android:layout_marginStart="@dimen/_5dip"
                         android:background="@drawable/btn_round_shape_white"
                         android:backgroundTint="@color/light_grays"
-                        android:fontFamily="@font/quicksand_bold"
+                        android:fontFamily="@font/roboto_regular"
                         android:paddingVertical="4dp"
                         android:text="City"
                         android:gravity="center"
@@ -88,8 +88,10 @@
                         android:layout_marginStart="@dimen/_5dip"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:ellipsize="end"
                         android:fontFamily="@font/quicksand_bold"
                         android:paddingVertical="4dp"
+                        android:textColor="@color/black"
                         android:text="fetch..."
                         android:textSize="@dimen/_14sp" />
 
@@ -104,6 +106,8 @@
                         android:fontFamily="@font/quicksand_bold"
                         android:paddingVertical="4dp"
                         android:text="fetch..."
+                        android:ellipsize="end"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14sp" />
 
                     <TextView
@@ -117,6 +121,8 @@
                         android:fontFamily="@font/quicksand_bold"
                         android:paddingVertical="4dp"
                         android:text="fetch..."
+                        android:ellipsize="end"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_14sp" />
 
                 </LinearLayout>

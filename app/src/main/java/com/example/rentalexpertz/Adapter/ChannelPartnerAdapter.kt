@@ -54,10 +54,6 @@ class ChannelPartnerAdapter(
 
         // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
-        /*  if ("Retailer"=="Retailer"){
-        //      holder.itemView.visibility=View.GONE
-          }*/
-
        /* holder.TvUpdate.setOnClickListener {
             rvClickListner.clickPos(mFilteredList[position].status, mFilteredList[position].id)
         }*/

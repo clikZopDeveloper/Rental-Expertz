@@ -34,16 +34,61 @@ class VisitSechduleAdapter(
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_call_sechdule, parent, false)
         return MyViewHolder(v)
     }
+    private fun setHeaderBg(view: View) {
+        view.setBackgroundResource(R.drawable.btn_border_shape)
+    }
+
+    private fun setContentBg(view: View) {
+        view.setBackgroundResource(R.drawable.btn_border_shape)
+    }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.setIsRecyclable(false)
-
         holder.tvLeadID.text = mFilteredList[position].id.toString()
         holder.tvCampaign.text = mFilteredList[position].campaign.toString()
         holder.tvName.text = mFilteredList[position].name.toString()
         holder.tvClassification.text = mFilteredList[position].classification.toString()
         holder.tvComment.text = mFilteredList[position].comments.toString()
-        holder.tvDate.text = mFilteredList[position].createdDate.toString()
+   //     holder.tvDate.text = mFilteredList[position].createdDate.toString()
+
+
+
+/*
+        if (position == 0) {
+            // Header Cells. Main Headings appear here
+            holder.apply {
+                setHeaderBg(holder.tvLeadID)
+                setHeaderBg(holder.tvName)
+                setHeaderBg(holder.tvCampaign)
+                setHeaderBg(holder.tvClassification)
+                setHeaderBg(holder.tvComment)
+              //  setHeaderBg(holder.tvDate)
+
+                holder.tvLeadID.text = "LeadID"
+                holder.tvName.text = "Name"
+                holder.tvCampaign.text = "Campaign"
+                holder.tvClassification.text = "Classification"
+                holder.tvComment.text = "Comment"
+              //  holder.tvDate.text = "Budget (in Millions)"
+            }
+        } else {
+          //  val modal =List<DashboardBean.Data.VisitSchedule> <DashboardBean.Data.VisitSchedule>[position - 1]
+
+            holder.apply {
+                setContentBg(holder.tvLeadID)
+                setContentBg(holder.tvName)
+                setContentBg(holder.tvCampaign)
+                setContentBg(holder.tvClassification)
+                setContentBg(holder.tvComment)
+
+                holder.tvLeadID.text = mFilteredList[position].id.toString()
+                holder.tvCampaign.text = mFilteredList[position].campaign.toString()
+                holder.tvName.text = mFilteredList[position].name.toString()
+                holder.tvClassification.text = mFilteredList[position].classification.toString()
+                holder.tvComment.text = mFilteredList[position].comments.toString()
+
+            }
+        }*/
 
       /*  if (mFilteredList[position].status.equals("Complete")) {
             holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
