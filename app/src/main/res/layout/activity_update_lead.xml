@@ -145,7 +145,7 @@
                     android:layout_marginStart="@dimen/_5dip"
                     android:layout_marginEnd="@dimen/_5dip"
                     android:background="@drawable/btn_border_shape"
-                    android:hint="Enter Your Remark"
+                    android:hint="Enter Your Remarks"
                     android:layout_marginTop="@dimen/_5dip"
                     android:paddingHorizontal="@dimen/_4dip"
                     android:paddingVertical="14dp"

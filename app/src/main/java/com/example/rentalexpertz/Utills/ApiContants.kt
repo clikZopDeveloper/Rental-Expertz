@@ -36,19 +36,14 @@ public class ApiContants {
         const val Type = "android"
         const val currency = "₹"
         const val dayStatus = "dayStatus"
+        const val addVoiceNote = "add-voice-note"
 
 ///////////////////Testing URL////////////////////////////////////////
-           const val BaseUrl="https://rental.leadsexpertz.com/api/"//Testing URL
-           const val ImageBaseUrl = "https://www.art.antimatterfit.com/"//Testing URL
-           const val ImageBaseUrlWhyChoose = "https://www.art.antimatterfit.com/public/images/"//Testing URL
-           const val VideoBaseUrl = "https://www.art.antimatterfit.com/"//Testing URL
+           const val BaseUrl="https://rental.clikzopdevp.com/api/"//Testing URL
 
         const val success = "success"
         const val failure = "failure"
         const val NoInternetConnection = "Please check your internet connection"
-        const val privacyUrl = "http://antimatterfit.com/privacy-policy"
-        const val returnPolicyUrl = "http://antimatterfit.com/return-policy/"
-        const val termsUrl = "http://antimatterfit.com/terms-condition"
         const val downloadUrl = "https://atulautomotive.online/"
         //        api Tags
         const val login = "login"
@@ -88,6 +83,7 @@ public class ApiContants {
         const val getNotification = "location-update"
         const val getProfile = "get-profile"
         const val getPasswordChange = "change-password"
+
       fun nameFirstLatter(text:String,textPrint:TextView){
         //  val str = "Hello World"
           val firstChar = text.first()

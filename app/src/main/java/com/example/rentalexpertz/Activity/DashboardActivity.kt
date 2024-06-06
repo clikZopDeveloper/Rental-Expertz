@@ -181,6 +181,7 @@ class DashboardActivity : AppCompatActivity() , ApiResponseListner{
         // Toast.makeText(this, "4", Toast.LENGTH_SHORT).show()
         Utility.showSnackBar(this, errorMessage)
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
         if (getSupportFragmentManager().getBackStackEntryCount() != 0) {
@@ -257,6 +258,7 @@ class DashboardActivity : AppCompatActivity() , ApiResponseListner{
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         fragmentTransaction.commit()
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)

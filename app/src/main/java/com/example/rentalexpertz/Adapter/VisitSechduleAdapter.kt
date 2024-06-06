@@ -25,15 +25,17 @@ class VisitSechduleAdapter(
     var context: Activity,
     var mFilteredList: List<DashboardBean.Data.VisitSchedule>,
     var rvClickListner: RvStatusClickListner
-) : RecyclerView.Adapter<VisitSechduleAdapter.MyViewHolder>(){
+) : RecyclerView.Adapter<VisitSechduleAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): MyViewHolder { // infalte the item Layout
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_call_sechdule, parent, false)
+        val v =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_call_sechdule, parent, false)
         return MyViewHolder(v)
     }
+
     private fun setHeaderBg(view: View) {
         view.setBackgroundResource(R.drawable.btn_border_shape)
     }
@@ -49,11 +51,9 @@ class VisitSechduleAdapter(
         holder.tvName.text = mFilteredList[position].name.toString()
         holder.tvClassification.text = mFilteredList[position].classification.toString()
         holder.tvComment.text = mFilteredList[position].comments.toString()
-   //     holder.tvDate.text = mFilteredList[position].createdDate.toString()
+        //     holder.tvDate.text = mFilteredList[position].createdDate.toString()
 
-
-
-/*
+        /*
         if (position == 0) {
             // Header Cells. Main Headings appear here
             holder.apply {
@@ -90,15 +90,15 @@ class VisitSechduleAdapter(
             }
         }*/
 
-      /*  if (mFilteredList[position].status.equals("Complete")) {
-            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
-        } else if (mFilteredList[position].status.equals("Pending")) {
-            holder.tvStatus.setTextColor(context.getResources().getColor(R.color.yellow_color))
-        } else {
-            holder.tvStatus.setTextColor(
-                context.getResources().getColor(R.color.paymentsdk_color_red)
-            )
-        }*/
+        /*  if (mFilteredList[position].status.equals("Complete")) {
+              holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
+          } else if (mFilteredList[position].status.equals("Pending")) {
+              holder.tvStatus.setTextColor(context.getResources().getColor(R.color.yellow_color))
+          } else {
+              holder.tvStatus.setTextColor(
+                  context.getResources().getColor(R.color.paymentsdk_color_red)
+              )
+          }*/
 
         // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
@@ -106,9 +106,9 @@ class VisitSechduleAdapter(
         //      holder.itemView.visibility=View.GONE
           }*/
 
-       /* holder.TvUpdate.setOnClickListener {
-            rvClickListner.clickPos(mFilteredList[position].status, mFilteredList[position].id)
-        }*/
+        /* holder.TvUpdate.setOnClickListener {
+             rvClickListner.clickPos(mFilteredList[position].status, mFilteredList[position].id)
+         }*/
     }
 
     override fun getItemCount(): Int {

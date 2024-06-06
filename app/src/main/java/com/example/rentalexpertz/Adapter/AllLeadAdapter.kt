@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentalexpertz.Activity.AddLeadActivity
+import com.example.rentalexpertz.Activity.RCORDeActivity
+import com.example.rentalexpertz.Activity.RecordActivity
 import com.example.rentalexpertz.Activity.UpdateLeadActivity
 import com.example.rentalexpertz.Model.AllLeadDataBean
 import com.example.rentalexpertz.R
@@ -67,6 +69,10 @@ class AllLeadAdapter(var context: Activity, var list: List<AllLeadDataBean.Data>
         holder.itemView.setOnClickListener {
             rvClickListner.clickPos(mFilteredList[position].status,mFilteredList[position].id)
         }
+        holder.tvRecordNotes.setOnClickListener {
+       //    context.startActivity(Intent(context, RCORDeActivity::class.java).putExtra("leadID",mFilteredList[position].id.toString()))
+          context.startActivity(Intent(context,RecordActivity::class.java).putExtra("leadID",mFilteredList[position].id.toString()))
+        }
     }
 
     override fun getItemCount(): Int {
@@ -79,7 +85,7 @@ class AllLeadAdapter(var context: Activity, var list: List<AllLeadDataBean.Data>
        val tvClient: TextView = itemview.findViewById(R.id.tvClient)
        val tvLeadDate: TextView = itemview.findViewById(R.id.tvLeadDate)
        val tvStatus: TextView = itemview.findViewById(R.id.tvStatus)
-       val tvNameFirstLatter: TextView = itemview.findViewById(R.id.tvNameFirstLatter)
+       val tvRecordNotes: TextView = itemview.findViewById(R.id.tvRecordNotes)
        val tvClientNumber: TextView = itemview.findViewById(R.id.tvClientNumber)
        val tvComments: TextView = itemview.findViewById(R.id.tvComments)
        val ivEditLead: TextView = itemview.findViewById(R.id.ivEditLead)

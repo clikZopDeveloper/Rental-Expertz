@@ -3,9 +3,7 @@ package com.example.rentalexpertz.Fragment
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +22,6 @@ import com.example.rentalexpertz.Model.AllTaskListBean
 import com.example.rentalexpertz.Model.BaseResponseBean
 import com.example.rentalexpertz.R
 import com.example.rentalexpertz.Utills.GeneralUtilities
-import com.example.rentalexpertz.Utills.PrefManager
 import com.example.rentalexpertz.Utills.RvStatusClickListner
 import com.example.rentalexpertz.Utills.SalesApp
 import com.example.rentalexpertz.Utills.Utility
@@ -38,8 +35,7 @@ class StaffFragment : Fragment(), ApiResponseListner {
     private var _binding: FragmentStaffBinding? = null
     private lateinit var mAllAdapter: AllTaskAdapter
 var type=""
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -55,14 +51,16 @@ var type=""
         titleText?.setTitle("All Task")
         apiClient = ApiController(activity, this)
         apiAllTask()
+
         binding.swipeRefersh.setOnRefreshListener {
             apiAllTask()
             binding.swipeRefersh.isRefreshing = false
-
         }
+
         binding.fabAddTask.setOnClickListener {
             openAddTaskDialog()
         }
+
         return root
     }
 
@@ -83,10 +81,11 @@ var type=""
 
     }
 
-    fun apiUpdateTask(taskID: Int) {
+    fun apiUpdateTask(reamrks: String, taskID: Int) {
         SalesApp.isAddAccessToken = true
         val params = Utility.getParmMap()
         params["task_id"] = taskID.toString()
+        params["remarks"] = reamrks.toString()
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.GetUpdateTask, params)
 
@@ -99,7 +98,7 @@ var type=""
             .setPositiveButton("Yes") { dialog, id ->
                 // Delete selected note from database
 
-                apiUpdateTask(taskID)
+             //   apiUpdateTask(edReamkrs.text.toString(), taskID)
             }
             .setNegativeButton("No") { dialog, id ->
                 // Dismiss the dialog
@@ -163,7 +162,8 @@ var type=""
         mAllAdapter = AllTaskAdapter(requireActivity(), data, object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
-                dialogUpdateTask(pos)
+                openUpdateTaskDialog(pos)
+           //     dialogUpdateTask(pos)
             }
         })
         binding.rcTask.adapter = mAllAdapter
@@ -231,6 +231,21 @@ var type=""
         ivClose.setOnClickListener { dialog.dismiss() }
     }
 
+    fun openUpdateTaskDialog(pos: Int) {
+        val dialog: Dialog = GeneralUtilities.openBootmSheetDailog(
+            R.layout.dialog_update_task, R.style.AppBottomSheetDialogTheme,
+            requireActivity()
+        )
+        val ivClose = dialog.findViewById<ImageView>(R.id.ivClose)
+        val btnReamrks = dialog.findViewById<TextView>(R.id.btnReamrks) as TextView
+        val edReamkrs = dialog.findViewById<EditText>(R.id.edReamkrs) as EditText
+
+        btnReamrks.setOnClickListener {
+            dialog.dismiss()
+            apiUpdateTask(edReamkrs.text.toString(),pos)
+        }
+        ivClose.setOnClickListener { dialog.dismiss() }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

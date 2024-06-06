@@ -18,6 +18,27 @@
         <include
             android:id="@+id/igToolbar"
             layout="@layout/toolbar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/_10dp"
+        android:layout_marginHorizontal="@dimen/_5dip"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/startRecordingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Recording" />
+
+        <Button
+            android:id="@+id/stopRecordingButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop Recording"
+            android:enabled="false" />
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +74,7 @@
                 android:drawableTint="@color/black"
                 android:layout_weight="1"
                 android:background="@drawable/btn_border_shape"
-                android:hint="Select Number"
+                android:hint="Enter Number"
                 app:boxStrokeWidth="0dp">
 
                 <AutoCompleteTextView

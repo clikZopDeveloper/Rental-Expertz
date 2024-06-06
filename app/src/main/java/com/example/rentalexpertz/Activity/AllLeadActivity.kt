@@ -5,6 +5,9 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.media.MediaRecorder
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +17,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,11 +33,22 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.gson.JsonElement
 import com.stpl.antimatter.Utils.ApiContants
+import java.io.File
+import java.io.IOException
 import java.util.ArrayList
 
 class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
     GoogleApiClient.OnConnectionFailedListener,
     ConnectivityListener.ConnectivityReceiverListener {
+
+    private val REQUEST_RECORD_AUDIO_PERMISSION = 200
+    private var permissionToRecordAccepted = false
+    private val permissions: Array<String> = arrayOf(android.Manifest.permission.RECORD_AUDIO)
+
+    private var mediaRecorder: MediaRecorder? = null
+    private var output: String = ""
+
+
     private lateinit var binding: ActivityAllLeadBinding
     private lateinit var apiClient: ApiController
     var myReceiver: ConnectivityListener? = null
@@ -77,7 +92,20 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
             }
         }
 
-        intent.getStringExtra("leadStatus")?.let { apiAllLead(it) }
+    //    requestAudioPermissions()
+
+        binding.startRecordingButton.setOnClickListener {
+            setupMediaRecorder()
+            startRecording()
+            binding.startRecordingButton.isEnabled = false
+            binding.stopRecordingButton.isEnabled = true
+        }
+
+        binding.stopRecordingButton.setOnClickListener {
+            stopRecording()
+            binding.startRecordingButton.isEnabled = true
+            binding.stopRecordingButton.isEnabled = false
+        }
         binding.selectStatus.setOnClickListener {
             setStatusData()
         }
@@ -309,6 +337,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         GeneralUtilities.registerBroadCastReceiver(this, myReceiver)
         SalesApp.setConnectivityListener(this)
         super.onResume()
+        intent.getStringExtra("leadStatus")?.let { apiAllLead(it) }
     }
 
     override fun onNetworkConnectionChange(isconnected: Boolean) {
@@ -384,4 +413,43 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         return menuList
     }
 
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        } else {
+            false
+        }
+        if (!permissionToRecordAccepted) finish()
+    }
+
+    private fun requestAudioPermissions() {
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+    }
+
+    private fun setupMediaRecorder() {
+        output = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
+        mediaRecorder = MediaRecorder().apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            setOutputFile(output)
+            prepare()
+        }
+    }
+
+
+    private fun startRecording() {
+        mediaRecorder?.start()
+    }
+
+    private fun stopRecording() {
+        mediaRecorder?.apply {
+            stop()
+            release()
+        }
+        mediaRecorder = null
+    }
 }

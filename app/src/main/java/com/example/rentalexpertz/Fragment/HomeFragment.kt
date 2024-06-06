@@ -53,10 +53,12 @@ class HomeFragment : Fragment(), ApiResponseListner {
         val titleText = (activity as DashboardActivity?)
         titleText?.setTitle("Dashboard")
 
-        ApiContants.movabalebutton(binding.fbAddArchitect, requireActivity())
+       ApiContants.movabalebutton(binding.fbAddArchitect, requireActivity())
+      /*  binding.fbAddArchitect.setOnClickListener {
+            startActivity(Intent(context, RecordingActivity::class.java))
+          //  startActivity(Intent(context, RecordActivity::class.java))
+        }*/
 
-        apiAllGet()
-        apiCallDashboard()
 
         binding.apply {
             refreshLayout.setOnRefreshListener {
@@ -74,7 +76,6 @@ class HomeFragment : Fragment(), ApiResponseListner {
                         )
                     )
                 }
-
             }
             /* fbAddArchitect.setOnClickListener {
                  startActivity(Intent(requireActivity(), AddLeadActivity::class.java).putExtra("way","Add Lead"))
@@ -675,7 +676,8 @@ class HomeFragment : Fragment(), ApiResponseListner {
 
     override fun onResume() {
         super.onResume()
-        //   apiAllGet()
+        apiAllGet()
+        apiCallDashboard()
     }
 
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:id="@+id/llRecorder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="50sp" />
+
+            <LinearLayout
+                android:id="@+id/llPlay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+              android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/imgViewPlay"
+                    android:layout_width="@dimen/_50dip"
+                    android:layout_height="@dimen/_50dip"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/ic_play_circle" />
+
+                <SeekBar
+                    android:id="@+id/seekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_100dip"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/imgBtRecord"
+                    android:layout_width="@dimen/_100dip"
+                    android:layout_height="@dimen/_100dip"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_mike" />
+
+                <ImageButton
+                    android:id="@+id/imgBtStop"
+                    android:layout_width="@dimen/_100dip"
+                    android:layout_height="@dimen/_100dip"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:padding="15dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_player_stop"
+                   />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnUploadToServer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_30dip"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/btn_round_shape"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="15dp"
+                android:text="Upload To Server"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</layout>
