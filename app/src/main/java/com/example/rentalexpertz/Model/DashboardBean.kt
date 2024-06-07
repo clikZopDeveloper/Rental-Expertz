@@ -56,6 +56,12 @@ data class DashboardBean(
             val visitDone: String,
             @SerializedName("visit_scheduled")
             val visitScheduled: String,
+            @SerializedName("booked")
+            val booked: String,
+            @SerializedName("cancelled")
+            val cancelled: String,
+            @SerializedName("completed")
+            val completed: String,
             @SerializedName("wrong_number")
             val wrongNumber: String
         )
@@ -309,6 +315,12 @@ data class DashboardBean(
             val visitDone: String,
             @SerializedName("visit_scheduled")
             val visitScheduled: String,
+            @SerializedName("booked")
+            val booked: String,
+            @SerializedName("cancelled")
+            val cancelled: String,
+            @SerializedName("completed")
+            val completed: String,
             @SerializedName("wrong_number")
             val wrongNumber: String
         )

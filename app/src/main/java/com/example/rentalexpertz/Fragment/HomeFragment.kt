@@ -152,12 +152,12 @@ class HomeFragment : Fragment(), ApiResponseListner {
                             viewAllLLead.setBackgroundColor(getResources().getColor(R.color.colorPrimary))
                             viewAllLLead.visibility = View.VISIBLE
                             viewAllLTask.visibility = View.INVISIBLE
-                            handleRcAllLeadDash(dashboardBean.data.allLead)
+                            handleRcAllLeadDash(dashboardBean.data.todayLead)
                         }
                     }
 
                     //  dashboardBeanData= DashboardBean.Data.TodayLead
-                    handleRcAllLeadDash(dashboardBean.data.allLead)
+                    handleRcAllLeadDash(dashboardBean.data.todayLead)
                     handleRcLeadCount(dashboardBean.data.allLeads)
 
                     binding.apply {
@@ -233,7 +233,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         _binding = null
     }
 
-    fun handleRcAllLeadDash(data: DashboardBean.Data.AllLead) {
+    fun handleRcAllLeadDash(data: DashboardBean.Data.TodayLead) {
         binding.rcDashboard.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         var mAdapter = DashAllLeadAdapter(requireActivity(), getMenusAllLead(data), object :
@@ -274,7 +274,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         // rvMyAcFiled.isNestedScrollingEnabled = false
     }
 
-    private fun getMenusAllLead(data: DashboardBean.Data.AllLead): ArrayList<MenuModelBean> {
+    private fun getMenusAllLead(data: DashboardBean.Data.TodayLead): ArrayList<MenuModelBean> {
         var menuList = ArrayList<MenuModelBean>()
         //  menuList.add(MenuModelBean(1, "Add Lead", data.newLeads.toString(), R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(2, "new lead", data.newLeads.toString(), R.drawable.ic_dashbord))
@@ -289,7 +289,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         menuList.add(
             MenuModelBean(
                 6,
-                "processed",
+                "processing",
                 data.processingLeads.toString(),
                 R.drawable.ic_dashbord
             )
@@ -328,34 +328,32 @@ class HomeFragment : Fragment(), ApiResponseListner {
             )
         )
 
-        /*
                  menuList.add(
                      MenuModelBean(
                          11,
                          "booked",
-                         data.convertedLeads.toString(),
+                         data.booked.toString(),
                          R.drawable.ic_dashbord
                      )
-                 )*/
-        /*
+                 )
+        menuList.add(
+            MenuModelBean(
+                11,
+                "cancelled",
+                data.cancelled.toString(),
+                R.drawable.ic_dashbord
+            )
+        )
+
           menuList.add(
                      MenuModelBean(
                          11,
-                         "completed",
+                         "converted",
                          data.convertedLeads.toString(),
                          R.drawable.ic_dashbord
                      )
                  )
 
-                  menuList.add(
-                     MenuModelBean(
-                         11,
-                         "cancelled",
-                         data.convertedLeads.toString(),
-                         R.drawable.ic_dashbord
-                     )
-                 )
-        */
 
         menuList.add(
             MenuModelBean(

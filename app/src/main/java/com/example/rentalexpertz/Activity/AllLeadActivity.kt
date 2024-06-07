@@ -395,7 +395,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         var menuList = ArrayList<MenuModelBean>()
         menuList.add(MenuModelBean(0, "new lead", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(1, "pending", "", R.drawable.ic_dashbord))
-        menuList.add(MenuModelBean(2, "processed", "", R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(2, "processing", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(3, "converted", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(4, "call scheduled", "", R.drawable.ic_dashbord))
         menuList.add(MenuModelBean(5, "visit scheduled", "", R.drawable.ic_dashbord))
