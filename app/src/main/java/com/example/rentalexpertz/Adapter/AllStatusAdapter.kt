@@ -14,7 +14,7 @@ import com.example.rentalexpertz.Utills.RvStatusClickListner
 
 class AllStatusAdapter(
     var context: Activity,
-    var list: List<GetAllStatusBean.Data>,
+    var list:  List<String>,
     var rvClickListner: RvStatusClickListner
 ) : RecyclerView.Adapter<AllStatusAdapter.MyViewHolder>(){
 
@@ -33,7 +33,7 @@ class AllStatusAdapter(
         holder.tvOff.background = RoundView(context.resources.getColor(R.color.orange), RoundView.getRadius(20f))
         holder.tvAdd.visibility = View.VISIBLE*/
 
-        holder.tvTitle.text= list[position].status
+        holder.tvTitle.text= list[position].toString()
        // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
       /*  if ("Retailer"=="Retailer"){
@@ -41,7 +41,7 @@ class AllStatusAdapter(
         }*/
 
         holder.itemView.setOnClickListener {
-            rvClickListner.clickPos(list[position].status,position)
+            rvClickListner.clickPos(list[position].toString(),position)
         }
     }
 

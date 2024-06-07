@@ -76,18 +76,17 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
         binding.igToolbar.switchDayStart.visibility = View.GONE
 
         leadID = intent.getStringExtra("leadID")!!
+        apiClient = ApiController(this, this)
         // leadStatus = intent.getStringExtra("leadStatus")!!
           requestPermission()
         //    typeMode()
-       // apiGetStatus()
-        handleRcStatus()
 
         calendar = Calendar.getInstance()
         val hour: Int = calendar!!.get(Calendar.HOUR_OF_DAY)
         val min: Int = calendar!!.get(Calendar.MINUTE)
 
         //   callCityListAdapter()
-
+        apiAllGet()
         binding.apply {
 
             btnRFQ.setOnClickListener {
@@ -150,6 +149,12 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
 
         }
     }
+    fun apiAllGet() {
+        SalesApp.isAddAccessToken = true
+        val params = Utility.getParmMap()
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.getStatus, params)
+    }
 
     fun typeMode() {
         binding.radioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
@@ -206,6 +211,16 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
                 Toast.makeText(this, updateLeadBean.msg, Toast.LENGTH_SHORT).show()
 
             }
+
+            if (tag == ApiContants.getStatus) {
+                val statusBean = apiClient.getConvertIntoModel<GetAllStatusBean>(
+                    jsonElement.toString(),
+                    GetAllStatusBean::class.java
+                )
+                if (statusBean.error == false) {
+                    handleRcStatus(statusBean.data)
+                }
+            }
         }catch (e:Exception){
             Log.d("error>>",e.localizedMessage)
         }
@@ -219,13 +234,13 @@ class UpdateLeadActivity : AppCompatActivity(), ApiResponseListner,
 
     }
 
-    fun handleRcStatus() {
+    fun handleRcStatus(data: List<String>) {
         binding.rcStatus.layoutManager = GridLayoutManager(this,3)
-        var mAdapter = UpdateAllStatusAdapter(this, getMenus(), object :
+        var mAdapter = UpdateAllStatusAdapter(this, data, object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
               //  if (status.equals("CALL SCHEDULED")||status.equals("VISIT SCHEDULED"))
-                if (pos==4||pos==5)
+                if (pos==3||pos==4)
                     binding.llDateTimeSection.visibility=View.VISIBLE
                 else
                     binding.llDateTimeSection.visibility=View.GONE

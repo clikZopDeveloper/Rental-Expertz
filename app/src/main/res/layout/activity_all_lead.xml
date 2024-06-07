@@ -54,6 +54,7 @@
                 android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
                 android:drawableTint="@color/black"
                 android:layout_weight="1"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/btn_border_shape"
                 android:hint="Select Status"
                 app:boxStrokeWidth="0dp">
@@ -90,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/_4dip"
-                android:paddingVertical="14dp"
+                android:paddingVertical="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_border_shape"
                 android:hint="Search here..."

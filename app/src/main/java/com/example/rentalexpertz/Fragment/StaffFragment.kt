@@ -8,10 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rentalexpertz.Activity.DashboardActivity
@@ -60,6 +57,8 @@ var type=""
         binding.fabAddTask.setOnClickListener {
             openAddTaskDialog()
         }
+
+
 
         return root
     }
@@ -168,6 +167,48 @@ var type=""
         })
         binding.rcTask.adapter = mAllAdapter
         mAllAdapter.notifyDataSetChanged()
+        binding.llStatusSection.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
+            if (i == R.id.btn1) {
+                binding.btn1.setTextColor(resources.getColor(R.color.white))
+                binding.btn2.setTextColor(resources.getColor(R.color.black))
+                binding.btn3.setTextColor(resources.getColor(R.color.black))
+                apiAllTask()
+
+
+            } else if (i == R.id.btn2) {
+                binding.btn1.setTextColor(resources.getColor(R.color.black))
+                binding.btn2.setTextColor(resources.getColor(R.color.white))
+                binding.btn3.setTextColor(resources.getColor(R.color.black))
+                type = "Pending"
+                if (data != null) {
+                    mAllAdapter.filter.filter(type)
+                }
+
+            }
+            else if (i == R.id.btn3) {
+                binding.btn1.setTextColor(resources.getColor(R.color.black))
+                binding.btn2.setTextColor(resources.getColor(R.color.black))
+                binding.btn3.setTextColor(resources.getColor(R.color.white))
+                type = "Complete"
+
+                if (data != null) {
+                    mAllAdapter.filter.filter(type)
+                }
+            }
+        })
+
+
+     /*
+
+        binding.tvAllTask.setOnClickListener {
+            binding.tvAllTask.setTextColor(getResources().getColor(R.color.white));
+            binding.tvPending.setTextColor(getResources().getColor(R.color.black));
+            binding.tvSucess.setTextColor(getResources().getColor(R.color.black));
+            type="AllTask"
+            if (data != null) {
+                mAllAdapter.filter.filter(type)
+            }
+        }
         binding.tvPending.setOnClickListener {
             binding.tvPending.setTextColor(getResources().getColor(R.color.white));
             binding.tvSucess.setTextColor(getResources().getColor(R.color.black));
@@ -183,7 +224,7 @@ var type=""
             if (data != null) {
                 mAllAdapter.filter.filter(type)
             }
-        }
+        }*/
 
     /*    binding.edSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {

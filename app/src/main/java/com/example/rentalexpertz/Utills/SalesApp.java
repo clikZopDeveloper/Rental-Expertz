@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.rentalexpertz.Model.CustProdCatBean;
 
+import com.example.rentalexpertz.Model.GetAllStatusBean;
 import com.example.rentalexpertz.Model.ProductCategoryBean;
 
 import com.example.rentalexpertz.Model.ProfileNameBean;
@@ -45,6 +46,7 @@ public class SalesApp extends Application implements Application.ActivityLifecyc
     public static boolean isAddAccessToken;
     public static boolean isUpComingSession = true;
     public static ArrayList<StateBean.Data> stateList = new ArrayList<>();
+    public static ArrayList<GetAllStatusBean> statusList = new ArrayList<>();
 
     public static Boolean isEnableScreenshort = true;
     @Override

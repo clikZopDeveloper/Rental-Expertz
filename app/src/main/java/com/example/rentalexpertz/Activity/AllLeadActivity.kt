@@ -41,6 +41,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
     GoogleApiClient.OnConnectionFailedListener,
     ConnectivityListener.ConnectivityReceiverListener {
 
+    private var statusLisst: List<String>?=null
     private val REQUEST_RECORD_AUDIO_PERMISSION = 200
     private var permissionToRecordAccepted = false
     private val permissions: Array<String> = arrayOf(android.Manifest.permission.RECORD_AUDIO)
@@ -60,7 +61,6 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_all_lead)
-
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.setFlags(
             WindowManager.LayoutParams.FLAG_SECURE,
@@ -74,7 +74,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         binding.igToolbar.ivLogout.visibility = View.GONE
         binding.igToolbar.ivMenu.visibility = View.VISIBLE
         binding.igToolbar.switchDayStart.visibility = View.GONE
-
+        apiClient = ApiController(this, this)
 
         if (intent.getStringExtra("leadStatus").equals("")){
             binding.igToolbar.tvTitle.text = "All Lead"
@@ -93,7 +93,7 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
         }
 
     //    requestAudioPermissions()
-
+        apiAllGet()
         binding.startRecordingButton.setOnClickListener {
             setupMediaRecorder()
             startRecording()
@@ -116,10 +116,16 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
 
         }
     }
+    fun apiAllGet() {
+        SalesApp.isAddAccessToken = true
+        val params = Utility.getParmMap()
+        apiClient.progressView.showLoader()
+        apiClient.getApiPostCall(ApiContants.getStatus, params)
+    }
 
     fun apiAllLead(status: String) {
         SalesApp.isAddAccessToken = true
-        apiClient = ApiController(this, this)
+
         val params = Utility.getParmMap()
         params["status"] = status
         params["conversion"] = conversion
@@ -190,7 +196,15 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
                     setLeadDetailDialog(leadDeatilBean.data)
                 }
             }
-
+            if (tag == ApiContants.getStatus) {
+                val statusBean = apiClient.getConvertIntoModel<GetAllStatusBean>(
+                    jsonElement.toString(),
+                    GetAllStatusBean::class.java
+                )
+                if (statusBean.error == false) {
+                   statusLisst=statusBean.data
+                }
+            }
         } catch (e: Exception) {
             Log.d("error>>", e.localizedMessage)
         }
@@ -354,10 +368,10 @@ class AllLeadActivity : AppCompatActivity(), ApiResponseListner,
     }
 
     fun setStatusData() {
-        val state = arrayOfNulls<String>(getMenus().size)
-        for (i in getMenus().indices) {
+        val state = arrayOfNulls<String>(statusLisst!!.size)
+        for (i in statusLisst!!.indices) {
             //Storing names to string array
-            state[i] = getMenus().get(i).title
+            state[i] =statusLisst!!.get(i)
         }
         val adapte1: ArrayAdapter<String?>
         adapte1 = ArrayAdapter(

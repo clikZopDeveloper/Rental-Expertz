@@ -50,6 +50,7 @@ public class ApiContants {
         const val logout = "logout"
         const val getCity = "get-city"
         const val getState = "get-state"
+        const val getStatus = "get-status"
 
 
         ////////////////New//////////////

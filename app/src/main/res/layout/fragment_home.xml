@@ -15,7 +15,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -287,13 +286,26 @@
                                     android:text="Last Comment"
                                     android:layout_marginStart="@dimen/_2dip"
                                     android:textSize="@dimen/_14sp" />
+                                <TextView
+                                    android:layout_width="124dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/btn_round_shape_white"
+                                    android:backgroundTint="@color/sub_tab_color"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:gravity="center"
+                                    android:paddingHorizontal="@dimen/_10dp"
+                                    android:paddingVertical="6dp"
+                                    android:text="Action"
+                                    android:layout_marginStart="@dimen/_2dip"
+                                    android:textSize="@dimen/_14sp" />
 
                             </LinearLayout>
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rcCallSechudle"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="@dimen/_150dip"
                                 android:layout_marginTop="@dimen/_10dp"
                                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 tools:itemCount="2"

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rentalexpertz.Activity.AddLeadActivity
@@ -39,11 +40,15 @@ class CallSechduleAdapter(
         holder.setIsRecyclable(false)
 
         holder.tvLeadID.text = mFilteredList[position].id.toString()
-        holder.tvCampaign.text = mFilteredList[position].campaign.toString()
-        holder.tvName.text = mFilteredList[position].name.toString()
-        holder.tvClassification.text = mFilteredList[position].classification.toString()
-        holder.tvComment.text = mFilteredList[position].comments.toString()
-        holder.tvDate.text = mFilteredList[position].createdDate.toString()
+        holder.tvCampaign.text = mFilteredList[position].campaign?.toString()
+        holder.tvName.text = mFilteredList[position].name?.toString()
+        holder.tvClassification.text = mFilteredList[position].classification?.toString()
+        holder.tvComment.text = mFilteredList[position].comments?.toString()
+        holder.tvDate.text = mFilteredList[position].createdDate?.toString()
+
+holder.ivCall.setOnClickListener {
+    GeneralUtilities.getInstance().makeCall(context, mFilteredList[position].mobile?.toString())
+}
 
       /*  if (mFilteredList[position].status.equals("Complete")) {
             holder.tvStatus.setTextColor(context.getResources().getColor(R.color.green))
@@ -57,13 +62,14 @@ class CallSechduleAdapter(
 
         // holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))
 
-        /*  if ("Retailer"=="Retailer"){
-        //      holder.itemView.visibility=View.GONE
-          }*/
 
        /* holder.TvUpdate.setOnClickListener {
             rvClickListner.clickPos(mFilteredList[position].status, mFilteredList[position].id)
         }*/
+
+        holder.llSection.setOnClickListener {
+            rvClickListner.clickPos(mFilteredList[position].status, mFilteredList[position].id)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -77,6 +83,8 @@ class CallSechduleAdapter(
         val tvClassification: TextView = itemview.findViewById(R.id.tvClassification)
         val tvComment: TextView = itemview.findViewById(R.id.tvComment)
         val tvDate: TextView = itemview.findViewById(R.id.tvDate)
+        val ivCall: ImageView = itemview.findViewById(R.id.ivCall)
+        val llSection: LinearLayout = itemview.findViewById(R.id.llSection)
     }
 
 

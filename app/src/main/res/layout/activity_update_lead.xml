@@ -182,12 +182,11 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/btn_round_shape"
-                    android:backgroundTint="@color/e_blue_color"
                     android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:padding="15dp"
                     android:text="Submit"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
 

@@ -30,7 +30,7 @@ class DashAllLeadAdapter(var context: Activity, var list: ArrayList<MenuModelBea
         holder.tvAdd.visibility = View.VISIBLE*/
 
 
-        holder.tvtitle.text= list[position].title
+        holder.tvtitle.text= list[position].title.toString()
        // holder.tvSubTitle.text= list[position].subTitle
         holder.tvTodayLeads.text= list[position].subTitle
   //      holder.ivImage.setImageDrawable(context.resources.getDrawable(list[position].drawableId))

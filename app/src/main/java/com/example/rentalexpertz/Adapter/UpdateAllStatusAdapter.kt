@@ -16,7 +16,7 @@ import java.util.ArrayList
 
 class UpdateAllStatusAdapter(
     var context: Activity,
-    var list: ArrayList<MenuModelBean>,
+    var list: List<String>,
     var rvClickListner: RvStatusClickListner
 ) : RecyclerView.Adapter<UpdateAllStatusAdapter.MyViewHolder>(){
     private var checkedPosition = 0
@@ -35,7 +35,7 @@ class UpdateAllStatusAdapter(
         holder.tvOff.background = RoundView(context.resources.getColor(R.color.orange), RoundView.getRadius(20f))
         holder.tvAdd.visibility = View.VISIBLE*/
 
-        holder.tvTitle.text= list[position].title
+        holder.tvTitle.text= list[position]
         if(checkedPosition == position){
             holder.ivChecked.visibility=View.VISIBLE
         }else{
@@ -48,7 +48,7 @@ class UpdateAllStatusAdapter(
             holder.ivChecked.visibility=View.VISIBLE
             notifyDataSetChanged();
 
-            rvClickListner.clickPos(list[position].title,position)
+            rvClickListner.clickPos(list[position],position)
         }
     }
 

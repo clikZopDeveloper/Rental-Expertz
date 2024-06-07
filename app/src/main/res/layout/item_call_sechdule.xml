@@ -20,6 +20,7 @@
             android:fillViewport="true">
 
             <LinearLayout
+                android:id="@+id/llSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -126,6 +127,21 @@
                         android:text="fetch..."
                         android:singleLine="true"
                         android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/ivCall"
+                        android:layout_width="@dimen/_25dp"
+                        android:layout_height="@dimen/_25dp"
+                        android:src="@drawable/baseline_call_24"
+                        android:tint="@color/white"
+                        android:layout_gravity="center"
+                        android:layout_below="@+id/tvClient"
+                        android:background="@drawable/circle"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:padding="@dimen/_2dip"
+                        android:layout_marginEnd="@dimen/_10dp"
+                        android:layout_toRightOf="@+id/tvClientNumber"
+                        android:layout_marginStart="@dimen/_5dip" />
                  <!--   <TextView
                         android:id="@+id/tvComment"
                         android:layout_width="wrap_content"

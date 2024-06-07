@@ -33,17 +33,17 @@ class AllLeadAdapter(var context: Activity, var list: List<AllLeadDataBean.Data>
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.setIsRecyclable(false)
 
-        holder.tvID.text= mFilteredList[position].id.toString()
-        holder.tvSource.text= mFilteredList[position].source.toString()
+        holder.tvID.text= mFilteredList[position].id?.toString()
+        holder.tvSource.text= mFilteredList[position].source?.toString()
       //  holder.tvPlumber.text= "Plumber : "+mFilteredList[position].plumber
     //    holder.tvArchitect.text= mFilteredList[position].architect
-        holder.tvClient.text= mFilteredList[position].name
+        holder.tvClient.text= mFilteredList[position].name?.toString()
      //   holder.tvNameFirstLatter.text=mFilteredList[position].clientName.first().toString()
      //   ApiContants.nameFirstLatter(mFilteredList[position].clientName,holder.tvNameFirstLatter)
-        holder.tvLeadDate.text=mFilteredList[position].createdDate.toString()
+        holder.tvLeadDate.text=mFilteredList[position].createdDate?.toString()
       //  holder.tvmep.text=mFilteredList[position].mep
-        holder.tvStatus.text=mFilteredList[position].status
-        holder.tvComments.text=mFilteredList[position].comments
+        holder.tvStatus.text=mFilteredList[position].status?.toString()
+        holder.tvComments.text=mFilteredList[position].comments?.toString()
         holder.tvClientNumber.text=mFilteredList[position].mobile?.toString()
 
         holder.ivCall.setOnClickListener {
@@ -70,7 +70,7 @@ class AllLeadAdapter(var context: Activity, var list: List<AllLeadDataBean.Data>
             rvClickListner.clickPos(mFilteredList[position].status,mFilteredList[position].id)
         }
         holder.tvRecordNotes.setOnClickListener {
-       //    context.startActivity(Intent(context, RCORDeActivity::class.java).putExtra("leadID",mFilteredList[position].id.toString()))
+        //   context.startActivity(Intent(context, RCORDeActivity::class.java).putExtra("leadID",mFilteredList[position].id.toString()))
           context.startActivity(Intent(context,RecordActivity::class.java).putExtra("leadID",mFilteredList[position].id.toString()))
         }
     }

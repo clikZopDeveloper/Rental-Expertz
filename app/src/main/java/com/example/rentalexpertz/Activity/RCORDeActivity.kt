@@ -42,6 +42,10 @@ class RCORDeActivity : AppCompatActivity(), ApiResponseListner {
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
 
+        startRecordingButton = findViewById(R.id.startRecordingButton)
+        stopRecordingButton = findViewById(R.id.stopRecordingButton)
+        uploadButton = findViewById(R.id.uploadButton)
+
         startRecordingButton.setOnClickListener {
             setupMediaRecorder()
             startRecording()
@@ -58,6 +62,7 @@ class RCORDeActivity : AppCompatActivity(), ApiResponseListner {
         uploadButton.setOnClickListener {
             uploadAudioFile("19")
         }
+
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -114,6 +119,7 @@ class RCORDeActivity : AppCompatActivity(), ApiResponseListner {
         apiClient.makeCallMultipart(ApiContants.addVoiceNote, builder.build())
 
     }
+
     override fun success(tag: String?, jsonElement: JsonElement) {
         try {
             apiClient.progressView.hideLoader()

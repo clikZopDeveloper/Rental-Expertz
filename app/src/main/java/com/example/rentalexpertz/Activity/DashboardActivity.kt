@@ -30,7 +30,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rentalexpertz.Adapter.AllStatusAdapter
+
 import com.example.rentalexpertz.Adapter.CommonFieldDrawerAdapter
 import com.example.rentalexpertz.ApiHelper.ApiController
 import com.example.rentalexpertz.ApiHelper.ApiResponseListner

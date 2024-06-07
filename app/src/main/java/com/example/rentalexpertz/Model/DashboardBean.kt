@@ -315,6 +315,8 @@ data class DashboardBean(
             val visitDone: String,
             @SerializedName("visit_scheduled")
             val visitScheduled: String,
+            @SerializedName("future_lead")
+            val futureLead: String,
             @SerializedName("booked")
             val booked: String,
             @SerializedName("cancelled")

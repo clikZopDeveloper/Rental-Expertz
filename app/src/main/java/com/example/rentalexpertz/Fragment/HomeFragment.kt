@@ -96,6 +96,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
         val params = Utility.getParmMap()
         apiClient.progressView.showLoader()
         apiClient.getApiPostCall(ApiContants.getState, params)
+
     }
 
     fun apiCallDashboard() {
@@ -178,6 +179,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
 
                                 if (!dashboardBean.data.callSchedule.isNullOrEmpty()) {
                                     rcCallSechudle.visibility=View.VISIBLE
+                                    apiCallDashboard()
                                     handleCallSechdule(dashboardBean.data.callSchedule)
 
                                 }else{
@@ -186,6 +188,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
                             } else if (i == R.id.btn2) {
                                 if (!dashboardBean.data.visitSchedule.isNullOrEmpty()) {
                                     rcCallSechudle.visibility=View.VISIBLE
+                                    apiCallDashboard()
                                     handleVistSechdule(dashboardBean.data.visitSchedule)
                                 }else{
                                     rcCallSechudle.visibility=View.GONE
@@ -193,6 +196,7 @@ class HomeFragment : Fragment(), ApiResponseListner {
                             } else if (i == R.id.btn3) {
                                 if (!dashboardBean.data.missedFollowup.isNullOrEmpty()) {
                                     rcCallSechudle.visibility=View.VISIBLE
+                                    apiCallDashboard()
                                     handleMissedFollowUp(dashboardBean.data.missedFollowup)
                                 }else{
                                     rcCallSechudle.visibility=View.GONE
@@ -217,6 +221,8 @@ class HomeFragment : Fragment(), ApiResponseListner {
                     SalesApp.stateList.addAll(stateBean.data)
                 }
             }
+
+
 
         } catch (e: Exception) {
             Log.d("error>>", e.localizedMessage)
@@ -277,11 +283,11 @@ class HomeFragment : Fragment(), ApiResponseListner {
     private fun getMenusAllLead(data: DashboardBean.Data.TodayLead): ArrayList<MenuModelBean> {
         var menuList = ArrayList<MenuModelBean>()
         //  menuList.add(MenuModelBean(1, "Add Lead", data.newLeads.toString(), R.drawable.ic_dashbord))
-        menuList.add(MenuModelBean(2, "new lead", data.newLeads.toString(), R.drawable.ic_dashbord))
+        menuList.add(MenuModelBean(2, "New Lead", data.newLeads.toString(), R.drawable.ic_dashbord))
         menuList.add(
             MenuModelBean(
                 3,
-                "pending",
+                "Pending",
                 data.pendingLeads.toString(),
                 R.drawable.ic_dashbord
             )
@@ -289,85 +295,100 @@ class HomeFragment : Fragment(), ApiResponseListner {
         menuList.add(
             MenuModelBean(
                 6,
-                "processing",
+                "Processing",
                 data.processingLeads.toString(),
                 R.drawable.ic_dashbord
             )
         )
-        menuList.add(
-            MenuModelBean(
-                4,
-                "converted",
-                data.convertedLeads.toString(),
-                R.drawable.ic_dashbord
-            )
-        )
-        menuList.add(
-            MenuModelBean(
-                5,
-                "call scheduled",
-                data.callScheduled.toString(),
-                R.drawable.ic_dashbord
-            )
-        )
 
         menuList.add(
-            MenuModelBean(
-                8,
-                "visit scheduled",
-                data.visitScheduled.toString(),
-                R.drawable.ic_dashbord
-            )
-        )
-        menuList.add(
-            MenuModelBean(
-                9,
-                "visit done",
-                data.visitDone.toString(),
-                R.drawable.ic_dashbord
-            )
-        )
+          MenuModelBean(
+              5,
+              "Call Scheduled",
+              data.callScheduled.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
 
-                 menuList.add(
-                     MenuModelBean(
-                         11,
-                         "booked",
-                         data.booked.toString(),
-                         R.drawable.ic_dashbord
-                     )
-                 )
-        menuList.add(
-            MenuModelBean(
-                11,
-                "cancelled",
-                data.cancelled.toString(),
-                R.drawable.ic_dashbord
-            )
-        )
+      menuList.add(
+          MenuModelBean(
+              8,
+              "Visit Scheduled",
+              data.visitScheduled.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
+      menuList.add(
+          MenuModelBean(
+              9,
+              "Visit Done",
+              data.visitDone.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
+      menuList.add(
+          MenuModelBean(
+              4,
+              "Converted",
+              data.convertedLeads.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
 
-          menuList.add(
-                     MenuModelBean(
-                         11,
-                         "converted",
-                         data.convertedLeads.toString(),
-                         R.drawable.ic_dashbord
-                     )
-                 )
+      menuList.add(
+          MenuModelBean(
+              11,
+              "Booked",
+              data.booked.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
+      menuList.add(
+          MenuModelBean(
+              11,
+              "Completed",
+              data.completed.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
+      menuList.add(
+          MenuModelBean(
+              11,
+              "Cancelled",
+              data.cancelled.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
+      menuList.add(
+          MenuModelBean(
+              11,
+              "Future Lead",
+              data.futureLead.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
 
+      menuList.add(
+          MenuModelBean(
+              16,
+              "Channel Partner",
+              data.channelPartner.toString(),
+              R.drawable.ic_dashbord
+          )
+      )
 
         menuList.add(
             MenuModelBean(
                 12,
-                "not interested",
+                "Not Interested",
                 data.notInterested.toString(),
                 R.drawable.ic_dashbord
             )
         )
-
         menuList.add(
             MenuModelBean(
                 13,
-                "not picked",
+                "Not Picked",
                 data.notPicked.toString(),
                 R.drawable.ic_dashbord
             )
@@ -375,28 +396,36 @@ class HomeFragment : Fragment(), ApiResponseListner {
         menuList.add(
             MenuModelBean(
                 14,
-                "wrong number",
+                "Wrong Number",
                 data.wrongNumber.toString(),
                 R.drawable.ic_dashbord
             )
         )
+
         menuList.add(
             MenuModelBean(
                 15,
-                "not reachable",
+                "Not Reachable",
                 data.notReachable.toString(),
                 R.drawable.ic_dashbord
             )
         )
-        menuList.add(
-            MenuModelBean(
-                16,
-                "channel partner",
-                data.channelPartner.toString(),
-                R.drawable.ic_dashbord
-            )
-        )
 
+/*  1. New Lead
+    2. Pending
+    Processing
+    3. Call Scheduled
+    4. Visit Scheduled
+    5. Visit Done
+    6. Converted
+    7. Booked
+    8. Completed
+    9. Cancelled
+    10. Future Lead
+    11. Channel Partner
+    12. Not Interested
+    13. Not Picked
+    14. Wrong Number*/
         return menuList
     }
 
@@ -435,7 +464,13 @@ class HomeFragment : Fragment(), ApiResponseListner {
         var mAdapter = CallSechduleAdapter(requireActivity(), data, object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
-
+               // Toast.makeText(requireContext(),"sdfsfd",Toast.LENGTH_SHORT).show()
+                requireActivity().startActivity(
+                    Intent(
+                        context,
+                        AllLeadActivity::class.java
+                    ).putExtra("leadStatus", status)
+                )
             }
         })
         binding.rcCallSechudle.adapter = mAdapter
@@ -449,7 +484,13 @@ class HomeFragment : Fragment(), ApiResponseListner {
         var mAdapter = VisitSechduleAdapter(requireActivity(), data, object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
-
+               // Toast.makeText(requireContext(),"sdfsfd",Toast.LENGTH_SHORT).show()
+                requireActivity().startActivity(
+                    Intent(
+                        context,
+                        AllLeadActivity::class.java
+                    ).putExtra("leadStatus", status)
+                )
             }
         })
         binding.rcCallSechudle.adapter = mAdapter
@@ -464,7 +505,12 @@ class HomeFragment : Fragment(), ApiResponseListner {
         var mAdapter = MissedFollowupAdapter(requireActivity(), data, object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
-
+                requireActivity().startActivity(
+                    Intent(
+                        context,
+                        AllLeadActivity::class.java
+                    ).putExtra("leadStatus", status)
+                )
             }
         })
         binding.rcCallSechudle.adapter = mAdapter
