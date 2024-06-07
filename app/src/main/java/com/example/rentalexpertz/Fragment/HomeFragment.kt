@@ -465,12 +465,16 @@ class HomeFragment : Fragment(), ApiResponseListner {
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
                // Toast.makeText(requireContext(),"sdfsfd",Toast.LENGTH_SHORT).show()
-                requireActivity().startActivity(
+               /* requireActivity().startActivity(
                     Intent(
                         context,
                         AllLeadActivity::class.java
                     ).putExtra("leadStatus", status)
-                )
+                )*/
+
+                requireActivity().startActivity(Intent(context,UpdateLeadActivity::class.java)
+                    .putExtra("leadID",pos.toString())
+                    .putExtra("leadStatus",status.toString()))
             }
         })
         binding.rcCallSechudle.adapter = mAdapter
@@ -485,12 +489,16 @@ class HomeFragment : Fragment(), ApiResponseListner {
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
                // Toast.makeText(requireContext(),"sdfsfd",Toast.LENGTH_SHORT).show()
-                requireActivity().startActivity(
+               /* requireActivity().startActivity(
                     Intent(
                         context,
                         AllLeadActivity::class.java
                     ).putExtra("leadStatus", status)
-                )
+                )*/
+
+                requireActivity().startActivity(Intent(context,UpdateLeadActivity::class.java)
+                    .putExtra("leadID",pos.toString())
+                    .putExtra("leadStatus",status.toString()))
             }
         })
         binding.rcCallSechudle.adapter = mAdapter
@@ -505,12 +513,16 @@ class HomeFragment : Fragment(), ApiResponseListner {
         var mAdapter = MissedFollowupAdapter(requireActivity(), data, object :
             RvStatusClickListner {
             override fun clickPos(status: String, pos: Int) {
-                requireActivity().startActivity(
+               /* requireActivity().startActivity(
                     Intent(
                         context,
                         AllLeadActivity::class.java
                     ).putExtra("leadStatus", status)
-                )
+                )*/
+
+                requireActivity().startActivity(Intent(context,UpdateLeadActivity::class.java)
+                    .putExtra("leadID",pos.toString())
+                    .putExtra("leadStatus",status.toString()))
             }
         })
         binding.rcCallSechudle.adapter = mAdapter

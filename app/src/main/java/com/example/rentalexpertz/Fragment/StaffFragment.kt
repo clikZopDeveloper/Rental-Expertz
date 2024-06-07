@@ -169,7 +169,7 @@ var type=""
         mAllAdapter.notifyDataSetChanged()
         binding.llStatusSection.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radioGroup, i ->
             if (i == R.id.btn1) {
-                binding.btn1.setTextColor(resources.getColor(R.color.white))
+                binding.btn1.setTextColor(resources.getColor(R.color.colorPrimary))
                 binding.btn2.setTextColor(resources.getColor(R.color.black))
                 binding.btn3.setTextColor(resources.getColor(R.color.black))
                 apiAllTask()
@@ -177,7 +177,7 @@ var type=""
 
             } else if (i == R.id.btn2) {
                 binding.btn1.setTextColor(resources.getColor(R.color.black))
-                binding.btn2.setTextColor(resources.getColor(R.color.white))
+                binding.btn2.setTextColor(resources.getColor(R.color.colorPrimary))
                 binding.btn3.setTextColor(resources.getColor(R.color.black))
                 type = "Pending"
                 if (data != null) {
@@ -188,7 +188,7 @@ var type=""
             else if (i == R.id.btn3) {
                 binding.btn1.setTextColor(resources.getColor(R.color.black))
                 binding.btn2.setTextColor(resources.getColor(R.color.black))
-                binding.btn3.setTextColor(resources.getColor(R.color.white))
+                binding.btn3.setTextColor(resources.getColor(R.color.colorPrimary))
                 type = "Complete"
 
                 if (data != null) {

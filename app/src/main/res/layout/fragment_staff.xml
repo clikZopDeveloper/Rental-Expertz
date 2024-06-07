@@ -36,7 +36,7 @@
                 android:paddingHorizontal="@dimen/_20dip"
                 android:paddingVertical="@dimen/_6dp"
                 android:text="All Task"
-                android:textColor="@color/white" />
+                android:textColor="@color/colorPrimary" />
 
             <RadioButton
                 android:id="@+id/btn2"

@@ -255,7 +255,7 @@
                                     android:gravity="center"
                                     android:paddingHorizontal="@dimen/_10dp"
                                     android:paddingVertical="6dp"
-                                    android:text="Campaign"
+                                    android:text="Source"
                                     android:layout_marginStart="@dimen/_2dip"
                                     android:textSize="@dimen/_14sp" />
 
@@ -284,6 +284,7 @@
                                     android:paddingHorizontal="@dimen/_10dp"
                                     android:paddingVertical="6dp"
                                     android:text="Last Comment"
+                                    android:visibility="gone"
                                     android:layout_marginStart="@dimen/_2dip"
                                     android:textSize="@dimen/_14sp" />
                                 <TextView

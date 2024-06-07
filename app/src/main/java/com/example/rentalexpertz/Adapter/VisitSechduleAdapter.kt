@@ -44,7 +44,7 @@ class VisitSechduleAdapter(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.setIsRecyclable(false)
         holder.tvLeadID.text = mFilteredList[position].id.toString()
-        holder.tvCampaign.text = mFilteredList[position].campaign?.toString()
+        holder.tvCampaign.text = mFilteredList[position].source?.toString()
         holder.tvName.text = mFilteredList[position].name?.toString()
         holder.tvClassification.text = mFilteredList[position].classification?.toString()
         holder.tvComment.text = mFilteredList[position].comments?.toString()
@@ -54,7 +54,7 @@ class VisitSechduleAdapter(
             GeneralUtilities.getInstance().makeCall(context, mFilteredList[position].mobile?.toString())
         }
 
-        holder.llSection.setOnClickListener {
+        holder.ivUpdate.setOnClickListener {
             rvClickListner.clickPos(mFilteredList[position].status, mFilteredList[position].id)
         }
 
@@ -128,7 +128,7 @@ class VisitSechduleAdapter(
         val tvComment: TextView = itemview.findViewById(R.id.tvComment)
         val tvDate: TextView = itemview.findViewById(R.id.tvDate)
         val ivCall: ImageView = itemview.findViewById(R.id.ivCall)
-        val llSection: LinearLayout = itemview.findViewById(R.id.llSection)
+        val ivUpdate: ImageView = itemview.findViewById(R.id.ivUpdate)
     }
 
 
